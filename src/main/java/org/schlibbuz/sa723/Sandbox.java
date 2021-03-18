@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Stefan
  */
-@WebServlet(name = "Sandbox", urlPatterns = {"/Sandbox"})
+@WebServlet(name = "Sandbox", urlPatterns = {""})
 public class Sandbox extends HttpServlet {
 
     /**
@@ -39,7 +39,7 @@ public class Sandbox extends HttpServlet {
             out.println("<title>Servlet Sandbox</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println(new StringBuilder("<h1>Servlet Sandbox at ").append(request.getContextPath()).append("</h1>").toString());
+            out.println(new StringBuilder("<h1>Sandbox at ").append(request.getServerName()).append("</h1>").toString());
             out.println("</body>");
             out.println("</html>");
         }
