@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.schlibbuz.sa723.servlet.components.Footer;
 
 /**
  *
@@ -36,10 +37,18 @@ public class Sandbox extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Sandbox</title>");
+            out.println("<title>Sandbox</title>");
+            out.println(" <link rel=\"stylesheet\" href=\"/css/base.css\">");
             out.println("</head>");
             out.println("<body>");
+            out.println("<div class=\"container\">");
+            out.println("<section id=\"header\">");
             out.println(new StringBuilder("<h1>Sandbox at ").append(request.getServerName()).append("</h1>").toString());
+            out.println("</section>");
+            out.println("<section id=\"body\">");
+            out.println("</section>");
+            Footer.getFooterAsList().stream().forEach(out::println);
+            out.println("</div>");
             out.println("</body>");
             out.println("</html>");
         }
