@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.111" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.113" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
     <property name="java.specification.version" value="11"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="C:\Users\Stefan\Documents\NetBeansProjects\sa723\target\test-classes;C:\Users\Stefan\Documents\NetBeansProjects\sa723\target\classes;C:\Users\Stefan\.m2\repository\javax\javaee-web-api\7.0\javaee-web-api-7.0.jar;C:\Users\Stefan\.m2\repository\commons-io\commons-io\2.8.0\commons-io-2.8.0.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Stefan\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\Stefan\.m2\repository\nl\jqno\equalsverifier\equalsverifier\3.5.5\equalsverifier-3.5.5.jar;"/>
+    <property name="java.class.path" value="D:\dev\sa723\target\test-classes;D:\dev\sa723\target\classes;C:\Users\Stefan\.m2\repository\javax\javaee-web-api\7.0\javaee-web-api-7.0.jar;C:\Users\Stefan\.m2\repository\commons-io\commons-io\2.8.0\commons-io-2.8.0.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Stefan\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\Stefan\.m2\repository\nl\jqno\equalsverifier\equalsverifier\3.5.5\equalsverifier-3.5.5.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -17,9 +17,9 @@
     <property name="user.country" value="CH"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.7\bin"/>
-    <property name="sun.java.command" value="C:\Users\Stefan\AppData\Local\Temp\surefire7301237574567155620\surefirebooter1759873164085308195.jar C:\Users\Stefan\AppData\Local\Temp\surefire7301237574567155620 2021-03-18T15-48-21_161-jvmRun1 surefire17655703671124966181tmp surefire_02410305096916996370tmp"/>
+    <property name="sun.java.command" value="C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973\surefirebooter11199205127792944604.jar C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973 2021-03-19T05-50-57_759-jvmRun1 surefire9994098285227525326tmp surefire_018221440068573950664tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="surefire.test.class.path" value="C:\Users\Stefan\Documents\NetBeansProjects\sa723\target\test-classes;C:\Users\Stefan\Documents\NetBeansProjects\sa723\target\classes;C:\Users\Stefan\.m2\repository\javax\javaee-web-api\7.0\javaee-web-api-7.0.jar;C:\Users\Stefan\.m2\repository\commons-io\commons-io\2.8.0\commons-io-2.8.0.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Stefan\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\Stefan\.m2\repository\nl\jqno\equalsverifier\equalsverifier\3.5.5\equalsverifier-3.5.5.jar;"/>
+    <property name="surefire.test.class.path" value="D:\dev\sa723\target\test-classes;D:\dev\sa723\target\classes;C:\Users\Stefan\.m2\repository\javax\javaee-web-api\7.0\javaee-web-api-7.0.jar;C:\Users\Stefan\.m2\repository\commons-io\commons-io\2.8.0\commons-io-2.8.0.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Stefan\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\Stefan\.m2\repository\nl\jqno\equalsverifier\equalsverifier\3.5.5\equalsverifier-3.5.5.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\Stefan"/>
     <property name="user.language" value="de"/>
@@ -27,13 +27,13 @@
     <property name="java.version.date" value="2020-04-14"/>
     <property name="java.home" value="C:\Program Files\Java\jdk-11.0.7"/>
     <property name="file.separator" value="\"/>
-    <property name="basedir" value="C:\Users\Stefan\Documents\NetBeansProjects\sa723"/>
+    <property name="basedir" value="D:\dev\sa723"/>
     <property name="java.vm.compressedOopsMode" value="Zero based"/>
     <property name="line.separator" value="&#10;"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Stefan\AppData\Local\Temp\surefire7301237574567155620\surefirebooter1759873164085308195.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973\surefirebooter11199205127792944604.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.7+8-LTS"/>
@@ -49,28 +49,28 @@
     <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
     <property name="java.io.tmpdir" value="C:\Users\Stefan\AppData\Local\Temp\"/>
     <property name="java.version" value="11.0.7"/>
-    <property name="user.dir" value="C:\Users\Stefan\Documents\NetBeansProjects\sa723"/>
+    <property name="user.dir" value="D:\dev\sa723"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
     <property name="java.awt.printerjob" value="sun.awt.windows.WPrinterJob"/>
     <property name="sun.os.patch.level" value=""/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk-11.0.7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\libnvvp;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\PuTTY\;C:\Users\Stefan\AppData\Local\Microsoft\WindowsApps;C:\Users\Stefan\.dotnet\tools;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\Nsight Compute 2020.1.0\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Gradle\gradle-6.5.1\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Stefan\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\Stefan\AppData\Local\Programs\Python\Python38\;C:\Users\Stefan\AppData\Local\Microsoft\WindowsApps;C:\Users\Stefan\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Stefan\AppData\Local\.meteor;C:\Users\Stefan\AppData\Roaming\npm;C:\Users\Stefan\AppData\Local\Yarn\bin;C:\Users\Stefan\bin\apache-maven-3.6.3\bin;;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-11.0.7\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\VMware\VMware Player\bin\;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Razer Chroma SDK\bin;C:\Program Files\Razer Chroma SDK\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\bin;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.0\libnvvp;C:\Program Files (x86)\Razer\ChromaBroadcast\bin;C:\Program Files\Razer\ChromaBroadcast\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\PuTTY\;C:\Users\Stefan\AppData\Local\Microsoft\WindowsApps;C:\Users\Stefan\.dotnet\tools;C:\Program Files\dotnet\;C:\Program Files\NVIDIA Corporation\Nsight Compute 2020.1.0\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\Yarn\bin\;C:\Gradle\gradle-6.5.1\bin;C:\Program Files\Git\cmd;C:\Program Files\dotnet;;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\Stefan\AppData\Local\Programs\Python\Python38\Scripts\;C:\Users\Stefan\AppData\Local\Programs\Python\Python38\;C:\Users\Stefan\AppData\Local\Microsoft\WindowsApps;C:\Users\Stefan\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Stefan\AppData\Local\.meteor;C:\Users\Stefan\AppData\Roaming\npm;C:\Users\Stefan\AppData\Local\Yarn\bin;C:\Users\Stefan\bin\apache-maven-3.6.3\bin;;."/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="java.vm.info" value="mixed mode"/>
     <property name="java.vm.version" value="11.0.7+8-LTS"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testEncapsulateLineShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.036"/>
+  <testcase name="testEncapsulateLineShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.038"/>
   <testcase name="testEncapsulateLineShouldFail(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEncapsulateLineShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEncapsulateLineShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.002"/>
-  <testcase name="testEncapsulateLineShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0"/>
+  <testcase name="testEncapsulateLineShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
+  <testcase name="testEncapsulateLineShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEncapsulateLineShouldPass(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
+  <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0"/>
   <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0"/>
+  <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
 </testsuite>
