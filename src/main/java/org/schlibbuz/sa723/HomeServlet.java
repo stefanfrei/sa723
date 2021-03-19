@@ -12,8 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.schlibbuz.sa723.servlet.components.Footer;
-import org.schlibbuz.sa723.servlet.components.Header;
+import org.schlibbuz.sa723.servlet.components.ComponentFactory;
 
 /**
  *
@@ -35,10 +34,9 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            Header.getHeaderAsList().stream().forEach(out::println);
-            //content area
-            Footer.getFooterAsList().stream().forEach(out::println);
-
+            out.println(ComponentFactory.getComponentToString("header.html"));
+            out.println(ComponentFactory.getComponentToString("sandbox.html"));
+            out.println(ComponentFactory.getComponentToString("footer.html"));
         }
     }
 

@@ -27,17 +27,6 @@
         Exploring Tomcat once again
     </description>
 
-    <!-- Filters -->
-    <filter>
-        <filter-name>ComponentAttacher</filter-name>
-        <filter-class>org.schlibbuz.sa723.ComponentAttacher</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>ComponentAttacher</filter-name>
-        <url-pattern>/filterisbuggy</url-pattern>
-    </filter-mapping>
-    <!-- End -->
-
     <!-- Servlets -->
     <servlet>
         <servlet-name>HomeServlet</servlet-name>
