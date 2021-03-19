@@ -12,13 +12,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.schlibbuz.sa723.servlet.components.Footer;
+import org.schlibbuz.sa723.servlet.components.Header;
 
 /**
  *
  * @author Stefan
  */
-@WebServlet(name = "Sandbox", urlPatterns = {""})
-public class Sandbox extends HttpServlet {
+@WebServlet(name = "HomeServlet", urlPatterns = {""})
+public class HomeServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,15 +35,10 @@ public class Sandbox extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Sandbox</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println(new StringBuilder("<h1>Sandbox at ").append(request.getServerName()).append("</h1>").toString());
-            out.println("</body>");
-            out.println("</html>");
+            Header.getHeaderAsList().stream().forEach(out::println);
+            //content area
+            Footer.getFooterAsList().stream().forEach(out::println);
+
         }
     }
 
