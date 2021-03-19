@@ -18,7 +18,7 @@ import org.schlibbuz.sa723.servlet.components.ComponentFactory;
  *
  * @author Stefan
  */
-@WebServlet(name = "HomeServlet", urlPatterns = {""})
+@WebServlet(name = "HomeServlet", urlPatterns = {"/"})
 public class HomeServlet extends HttpServlet {
 
     /**

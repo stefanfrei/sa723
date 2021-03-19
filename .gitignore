@@ -30,5 +30,7 @@ bin/
 .settings
 .classpath
 .project
+.factorypath
+.vscode/
 test/resources/projects/**/.vscode
 test/resources/projects/maven/salut/testGradle
