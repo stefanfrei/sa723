@@ -17,11 +17,16 @@ public class Footer {
 
     private static final List<String> footer = new ArrayList<>(
             Arrays.asList(
+                    "</section>",
                     "<section id=\"footer\">",
                     "<div>",
                     "Footer",
                     "</div>",
-                    "</section>"
+                    "</section>",
+                    "<p>&copy Schlibbuz.org</p>",
+                    "</div>",
+                    "</body>",
+                    "</html>"
             )
     );
 

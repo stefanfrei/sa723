@@ -21,12 +21,11 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Stefan
  */
-@WebFilter("/*")
+@WebFilter("/filterisbuggy")
 public class ComponentAttacher implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-        System.out.println("Filter initialized");
     }
 
     @Override
@@ -39,21 +38,23 @@ public class ComponentAttacher implements Filter {
 
         PrintWriter responseWriter = response.getWriter();
 
-        if (wrapper.getContentType().contains("text/html")) {
+        if (wrapper.getContentType().startsWith("text/html")) {
             CharArrayWriter charWriter = new CharArrayWriter();
             String originalContent = wrapper.toString();
+            System.out.println(originalContent);
 
             int indexOfCloseBodyTag = originalContent.indexOf("</body>") - 1;
 
             charWriter.write(originalContent.substring(0, indexOfCloseBodyTag));
 
-            String copyrightInfo = "<p>Copyright CodeJava.net</p>";
+            String copyrightInfo = "<p>&copy Schlibbuz.org</p>";
             String closeHTMLTags = "</body></html>";
 
             charWriter.write(copyrightInfo);
             charWriter.write(closeHTMLTags);
 
             String alteredContent = charWriter.toString();
+            System.out.println(alteredContent);
             response.setContentLength(alteredContent.length());
             responseWriter.write(alteredContent);
         }

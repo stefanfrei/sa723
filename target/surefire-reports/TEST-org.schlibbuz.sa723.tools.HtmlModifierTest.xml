@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.113" tests="12" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.093" tests="12" errors="0" skipped="0" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -17,7 +17,7 @@
     <property name="user.country" value="CH"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-11.0.7\bin"/>
-    <property name="sun.java.command" value="C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973\surefirebooter11199205127792944604.jar C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973 2021-03-19T05-50-57_759-jvmRun1 surefire9994098285227525326tmp surefire_018221440068573950664tmp"/>
+    <property name="sun.java.command" value="C:\Users\Stefan\AppData\Local\Temp\surefire6598627694109901486\surefirebooter16976057411668652241.jar C:\Users\Stefan\AppData\Local\Temp\surefire6598627694109901486 2021-03-19T07-27-19_273-jvmRun1 surefire14956398678740748423tmp surefire_080919278664240962tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="D:\dev\sa723\target\test-classes;D:\dev\sa723\target\classes;C:\Users\Stefan\.m2\repository\javax\javaee-web-api\7.0\javaee-web-api-7.0.jar;C:\Users\Stefan\.m2\repository\commons-io\commons-io\2.8.0\commons-io-2.8.0.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.5.2\junit-jupiter-api-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\apiguardian\apiguardian-api\1.1.0\apiguardian-api-1.1.0.jar;C:\Users\Stefan\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-commons\1.5.2\junit-platform-commons-1.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.5.2\junit-jupiter-params-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.5.2\junit-jupiter-engine-5.5.2.jar;C:\Users\Stefan\.m2\repository\org\junit\platform\junit-platform-engine\1.5.2\junit-platform-engine-1.5.2.jar;C:\Users\Stefan\.m2\repository\nl\jqno\equalsverifier\equalsverifier\3.5.5\equalsverifier-3.5.5.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -33,7 +33,7 @@
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="surefire.real.class.path" value="C:\Users\Stefan\AppData\Local\Temp\surefire10898476341972531973\surefirebooter11199205127792944604.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Stefan\AppData\Local\Temp\surefire6598627694109901486\surefirebooter16976057411668652241.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="11.0.7+8-LTS"/>
@@ -61,16 +61,16 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="55.0"/>
   </properties>
-  <testcase name="testEncapsulateLineShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.038"/>
+  <testcase name="testEncapsulateLineShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.028"/>
   <testcase name="testEncapsulateLineShouldFail(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEncapsulateLineShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEncapsulateLineShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
+  <testcase name="testEncapsulateLineShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.002"/>
   <testcase name="testEncapsulateLineShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEncapsulateLineShouldPass(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0"/>
+  <testcase name="testEscapeDoubleQuotesShouldFail(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
   <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[1]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
-  <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
+  <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[2]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0"/>
   <testcase name="testEscapeDoubleQuotesShouldPass(String, String)[3]" classname="org.schlibbuz.sa723.tools.HtmlModifierTest" time="0.001"/>
 </testsuite>
