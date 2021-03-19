@@ -10,8 +10,8 @@ and open the template in the editor.
 
 body {
     background-color: #2B292E;
-    color: silver;
-    font-family: verdana, arial;
+    color: #C0C0C0;
+    font-family : corbel, verdana, arial, helvetica, sans-serif;
     font-size: 16px;
     margin: 0;
     padding: 0;
