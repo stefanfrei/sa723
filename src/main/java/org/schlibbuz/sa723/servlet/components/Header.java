@@ -26,7 +26,7 @@ public class Header {
                     "<body>",
                     "<div class=\"container\">",
                     "<section id=\"header\">",
-                    new StringBuilder("<h1>Home@").append("localhost").append("</h1>").toString(),
+                    new StringBuilder("<h1>Home@").append("localhost running version ").append(Header.class.getPackage().getImplementationVersion()).append("</h1>").toString(),
                     "</section>",
                     "<section id=\"body\">"
             )
