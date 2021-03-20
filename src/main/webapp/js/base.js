@@ -15,7 +15,7 @@ function* range(start, end) {
 
 
 const createRow = (id) => {
-    const row = document.createElement('DIV');
+    const row = document.createElement('div');
     row.id = id;
     row.classList = 'cfx';
     for (i of range(1, CELLS_PER_ROW)) {
@@ -28,9 +28,8 @@ const createRow = (id) => {
 
 
 const createCell = () => {
-    const cell = document.createElement('DIV');
+    const cell = document.createElement('div');
     cell.classList = 'cell';
-    cell.innerHTML = createRandomChar();
     return cell;
 };
 
@@ -43,18 +42,23 @@ const createRandomChar = () => {
 
 
 const doEffect = () => {
-    const row = window.MATRIX.lastChild;
+    const matrix = document.getElementById('matrix-wrapper');
+    const row = matrix.lastChild;
     row.remove();
-    window.MATRIX.prepend(row);
+    matrix.prepend(row);
 };
 
+
+const stopMatrix = () => {
+    window.clearInterval(interval_id);
+}
 
 
 /* Listener-Code */
 const initMatrix = () => {
-    window.MATRIX = document.querySelector('#wrapper');
+    const matrix = document.getElementById('matrix-wrapper');
     for (id of range(1, NUM_ROWS)) {
-        window.MATRIX.append(
+        matrix.append(
             createRow(id),
         );
     }
@@ -62,8 +66,8 @@ const initMatrix = () => {
 window.addEventListener('DOMContentLoaded', initMatrix);
 
 
-const runMatrix = () => {
+const startMatrix = () => {
     interval_id = window.setInterval(doEffect, 50);
 };
-document.addEventListener('readystatechange', runMatrix);
+// document.addEventListener('readystatechange', startMatrix);
 /* End */
