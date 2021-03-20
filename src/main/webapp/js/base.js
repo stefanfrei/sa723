@@ -11,11 +11,7 @@ createDiv = (target, prepend = false) => {
     const div = document.createElement('DIV');
     div.innerHTML = String.fromCharCode(0x30A0 + Math.random() * (0x30FF-0x30A0+1));
     console.log(target);
-    if (prepend) {
-        target.prepend(div);
-    } else {
-        target.append(div);
-    }
+    prepend ? target.prepend(div) : target.append(div);
 }
 
 doEffect = (target) => {
