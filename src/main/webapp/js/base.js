@@ -6,24 +6,13 @@ const UC_BOUNDS = UC_BOUNDS_UPPER - UC_BOUNDS_LOWER+1
 
 var interval_id;
 
+
 function* range(start, end) {
     for (let i = start; i <= end; i += 1) {
         yield i;
     }
 }
 
-const runMatrix = () => {
-    interval_id = window.setInterval(doEffect, 50);
-};
-
-const initMatrix = () => {
-    const target = document.querySelector('#wrapper');
-    for (id of range(1, NUM_ROWS)) {
-        target.append(
-            createRow(id),
-        );
-    }
-};
 
 const createRow = (id) => {
     const row = document.createElement('DIV');
@@ -37,6 +26,7 @@ const createRow = (id) => {
     return row;
 };
 
+
 const createCell = () => {
     const cell = document.createElement('DIV');
     cell.classList = 'cell';
@@ -44,19 +34,36 @@ const createCell = () => {
     return cell;
 };
 
+
 const createRandomChar = () => {
     return String.fromCharCode(
         UC_BOUNDS_LOWER + Math.random() * (UC_BOUNDS),
     );
 };
 
+
 const doEffect = () => {
-    const matrix = document.querySelector('.matrix');
-    const row = matrix.lastChild;
+    const row = window.MATRIX.lastChild;
     row.remove();
-    matrix.prepend(row);
+    window.MATRIX.prepend(row);
 };
 
+
+
+/* Listener-Code */
+const initMatrix = () => {
+    window.MATRIX = document.querySelector('#wrapper');
+    for (id of range(1, NUM_ROWS)) {
+        window.MATRIX.append(
+            createRow(id),
+        );
+    }
+};
 window.addEventListener('DOMContentLoaded', initMatrix);
 
+
+const runMatrix = () => {
+    interval_id = window.setInterval(doEffect, 50);
+};
 document.addEventListener('readystatechange', runMatrix);
+/* End */
