@@ -5,6 +5,8 @@ const UC_BOUNDS = {
     upper : 0x30FF,
 };
 
+var interval_id;
+
 function* range(start, end) {
     for (let i = start; i <= end; i += 1) {
         yield i;
@@ -45,21 +47,16 @@ const createRandomChar = () => {
     );
 };
 
-const doEffect = (target) => {
-    flushLastLine(target);
-    prependLine(target);
-};
-
-const prependLine = (target) => {
-    for (i of range(1, 40)) {
-        createDiv(target, true);
-    }
-};
-
-const flushRow = (target) => {
-    for (i of range(1, 40)) {
-        target.lastChild.remove();
-    }
+const doEffect = () => {
+    console.log('effect');
+    const matrix = document.querySelector('.matrix');
+    const row = matrix.lastChild;
+    row.remove();
+    matrix.prepend(row);
 };
 
 window.addEventListener('DOMContentLoaded', initMatrix);
+
+document.addEventListener('readystatechange', () => {
+    interval_id = window.setInterval(doEffect, 50);
+});
