@@ -17,7 +17,7 @@ body {
     padding: 0;
 }
 
-.clearfix::after {
+.cfx::after {
     content: "";
     clear: both;
     display: table;
@@ -28,15 +28,15 @@ body {
 }
 
 #wrapper {
-    margin: 0 auto;
-    width: 800px;
-}
-
-#wrapper > div {
     background-color: #3d3942;
     box-sizing: border-box;
     color:#001675;
-    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 800px;
+}
+
+#wrapper  div.cell {
     filter: alpha(opacity=50);
     float: left;
     height: 18px;
@@ -44,7 +44,6 @@ body {
     margin: 1px;
     opacity: 0.5;
     overflow: hidden;
-    text-align: center;
     transition: opacity 1s ease-in-out;
     width: 18px;
     -webkit-transition: opacity 0.1s ease-in-out;
