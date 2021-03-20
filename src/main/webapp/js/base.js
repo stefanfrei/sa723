@@ -1,9 +1,8 @@
 const NUM_ROWS = 40;
 const CELLS_PER_ROW = 40;
-const UC_BOUNDS = {
-    lower : 0x30A0,
-    upper : 0x30FF,
-};
+const UC_BOUNDS_LOWER = 0x30A0;
+const UC_BOUNDS_UPPER = 0x30FF;
+const UC_BOUNDS = UC_BOUNDS_UPPER - UC_BOUNDS_LOWER+1
 
 var interval_id;
 
@@ -47,7 +46,7 @@ const createCell = () => {
 
 const createRandomChar = () => {
     return String.fromCharCode(
-        UC_BOUNDS.lower + Math.random() * (UC_BOUNDS.upper-UC_BOUNDS.lower+1),
+        UC_BOUNDS_LOWER + Math.random() * (UC_BOUNDS),
     );
 };
 
