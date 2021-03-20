@@ -36,14 +36,14 @@ const createRow = (id) => {
         );
     }
     return row;
-}
+};
 
 const createCell = () => {
     const cell = document.createElement('DIV');
     cell.classList = 'cell';
     cell.innerHTML = createRandomChar();
     return cell;
-}
+};
 
 const createRandomChar = () => {
     return String.fromCharCode(
