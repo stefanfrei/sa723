@@ -12,18 +12,18 @@ function* range(start, end) {
     }
 }
 
-createDiv = (target, prepend = false) => {
+const createDiv = (target, prepend = false) => {
     const div = document.createElement('DIV');
     div.innerHTML = String.fromCharCode(0x30A0 + Math.random() * (0x30FF-0x30A0+1));
     prepend ? target.prepend(div) : target.append(div);
 }
 
-doEffect = (target) => {
+const doEffect = (target) => {
     flushLastLine(target);
     prependLine(target);
 };
 
-prependLine = (target) => {
+const prependLine = (target) => {
     for (i of range(1, 40)) {
         createDiv(target, true);
     }
