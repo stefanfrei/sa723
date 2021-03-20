@@ -17,6 +17,43 @@ body {
     padding: 0;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 .container {
     padding: 12px;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 800px;
+}
+
+#wrapper > div {
+    background-color: #3d3942;
+    box-sizing: border-box;
+    color:#001675;
+    display: block;
+    filter: alpha(opacity=50);
+    float: left;
+    height: 18px;
+    line-height: 18px;
+    margin: 1px;
+    opacity: 0.5;
+    overflow: hidden;
+    text-align: center;
+    transition: opacity 1s ease-in-out;
+    width: 18px;
+    -webkit-transition: opacity 0.1s ease-in-out;
+    -moz-transition: opacity 0.1s ease-in-out;
+    -ms-transition: opacity 0.1s ease-in-out;
+    -o-transition: opacity 0.1s ease-in-out;
+}
+
+#wrapper > div.activated {
+    filter: alpha(opacity=100);
+    opacity: 1.0;
 }

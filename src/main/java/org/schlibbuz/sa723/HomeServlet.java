@@ -7,11 +7,13 @@ package org.schlibbuz.sa723;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.schlibbuz.sa723.servlet.components.ComponentFactory;
 
 /**
@@ -20,6 +22,8 @@ import org.schlibbuz.sa723.servlet.components.ComponentFactory;
  */
 @WebServlet(name = "HomeServlet", urlPatterns = {"/"})
 public class HomeServlet extends HttpServlet {
+
+    static final long serialVersionUID = 42L;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
