@@ -35,7 +35,7 @@ body {
     width: 800px;
 }
 
-#wrapper  .cell {
+.matrix  .cell {
     background-color: #3d3942;
     filter: alpha(opacity=50);
     float: left;
