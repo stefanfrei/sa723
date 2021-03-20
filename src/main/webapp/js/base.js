@@ -52,7 +52,6 @@ const createRandomChar = () => {
 };
 
 const doEffect = () => {
-    console.log('effect');
     const matrix = document.querySelector('.matrix');
     const row = matrix.lastChild;
     row.remove();
