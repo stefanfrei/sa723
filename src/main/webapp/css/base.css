@@ -28,7 +28,6 @@ body {
 }
 
 #wrapper {
-    background-color: #3d3942;
     box-sizing: border-box;
     color:#001675;
     margin: 0 auto;
@@ -36,7 +35,8 @@ body {
     width: 800px;
 }
 
-#wrapper  div.cell {
+#wrapper  .cell {
+    background-color: #3d3942;
     filter: alpha(opacity=50);
     float: left;
     height: 18px;
