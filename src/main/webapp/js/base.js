@@ -13,6 +13,9 @@ function* range(start, end) {
     }
 }
 
+const runMatrix = () => {
+    interval_id = window.setInterval(doEffect, 50);
+}
 const initMatrix = () => {
     const target = document.querySelector('#wrapper');
     for (id of range(1, NUM_ROWS)) {
@@ -57,6 +60,4 @@ const doEffect = () => {
 
 window.addEventListener('DOMContentLoaded', initMatrix);
 
-document.addEventListener('readystatechange', () => {
-    interval_id = window.setInterval(doEffect, 50);
-});
+document.addEventListener('readystatechange', runMatrix);
