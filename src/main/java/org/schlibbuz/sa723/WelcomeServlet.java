@@ -25,7 +25,7 @@ import org.schlibbuz.sa723.servlet.components.ComponentFactory;
  *
  * @author Stefan
  */
-public class HomeServlet extends HttpServlet {
+public class WelcomeServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
@@ -42,9 +42,9 @@ public class HomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            // out.println(ComponentFactory.getComponentToString("header.html"));
-            // out.println(ComponentFactory.getComponentToString("sandbox.html"));
-            // out.println(ComponentFactory.getComponentToString("footer.html"));
+            out.println(ComponentFactory.getComponentToString("header.html"));
+            out.println(ComponentFactory.getComponentToString("sandbox.html"));
+            
             try {
                 // Obtain our environment naming context
                 Context initCtx = new InitialContext();
@@ -64,6 +64,8 @@ public class HomeServlet extends HttpServlet {
             } catch (NamingException e) {
                 out.println(e.getMessage());
             }
+
+            out.println(ComponentFactory.getComponentToString("footer.html"));
         }
     }
 
