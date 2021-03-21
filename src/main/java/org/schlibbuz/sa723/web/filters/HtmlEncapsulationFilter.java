@@ -31,7 +31,10 @@ public class HtmlEncapsulationFilter implements Filter {
         chain.doFilter(req, res);
 
         HttpServletResponse response = (HttpServletResponse) res;
+
         if (response.getContentType().startsWith("text/html")) {
+            response.setContentType("text/html;charset=UTF-8");
+            response.setCharacterEncoding("UTF-8");
             System.out.println("html-footer needed");
             try(PrintWriter out = response.getWriter()) {
                 out.println(new SimpleComponentFactory().createComponent(ComponentType.FOOTER).readAsString());
