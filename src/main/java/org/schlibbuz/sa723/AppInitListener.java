@@ -23,11 +23,17 @@ public class AppInitListener
         //Run this before web application is started
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
-        System.out.println("ServletContextListener started");
+
+        String appPath = System.getProperty("catalina.base") + "/webapps/ROOT";
+
+
+        System.setProperty("sandbox.app.root", appPath);
+
         System.setProperty(
-            "sandbox.app.root",
-            new StringBuilder(System.getProperty("catalina.base")).append("/webapps/ROOT").toString()
+            "sandbox.app.templates.folder",
+            appPath + "/WEB-INF/templates"
         );
-        System.out.println(System.getProperty("sandbox.app.root"));
+
+        System.setProperty("sandbox.app.templates.suffix", ".html");
     }
 }
