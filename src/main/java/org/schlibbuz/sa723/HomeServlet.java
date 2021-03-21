@@ -7,11 +7,17 @@ package org.schlibbuz.sa723;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 
 import org.schlibbuz.sa723.servlet.components.ComponentFactory;
 
@@ -27,29 +33,49 @@ public class HomeServlet extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.println(ComponentFactory.getComponentToString("header.html"));
-            out.println(ComponentFactory.getComponentToString("sandbox.html"));
-            out.println(ComponentFactory.getComponentToString("footer.html"));
+            // out.println(ComponentFactory.getComponentToString("header.html"));
+            // out.println(ComponentFactory.getComponentToString("sandbox.html"));
+            // out.println(ComponentFactory.getComponentToString("footer.html"));
+            try {
+                // Obtain our environment naming context
+                Context initCtx = new InitialContext();
+                Context envCtx = (Context) initCtx.lookup("java:comp/env");
+
+                // Look up our data source
+                DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
+
+                // Allocate and use a connection from the pool
+                try (Connection conn = ds.getConnection()) {
+                    out.println(conn.getSchema());
+                    out.println(conn.isClosed());
+                } catch (SQLException e) {
+                    out.println(e.getMessage());
+                }
+
+            } catch (NamingException e) {
+                out.println(e.getMessage());
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -60,10 +86,10 @@ public class HomeServlet extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
