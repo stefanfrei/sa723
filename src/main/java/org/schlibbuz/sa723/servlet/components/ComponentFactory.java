@@ -8,7 +8,6 @@ package org.schlibbuz.sa723.servlet.components;
 import java.io.File;
 import java.io.IOException;
 import org.apache.commons.io.FileUtils;
-import org.schlibbuz.sa723.Constzz;
 
 /**
  *
@@ -19,7 +18,7 @@ public class ComponentFactory {
     public static String getComponentToString(String filename) {
         try {
             return FileUtils.readFileToString(new File(
-                    new StringBuilder(Constzz.TEMPLATE_FOLDER).append("/").append(filename).toString()
+                    new StringBuilder(System.getProperty("sandbox.app.root")).append("/WEB-INF/templates/").append(filename).toString()
             ), "UTF-8");
         } catch(IOException e) {
             System.err.println(new StringBuilder("File error -> ").append(e.getMessage()));

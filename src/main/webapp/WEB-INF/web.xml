@@ -24,14 +24,18 @@
         Exploring Tomcat once again
     </description>
 
+    <listener>
+        <listener-class>org.schlibbuz.sa723.AppInitListener</listener-class>
+    </listener>
+
     <!-- Servlets -->
     <servlet>
-        <servlet-name>HomeServlet</servlet-name>
-        <servlet-class>org.schlibbuz.sa723.HomeServlet</servlet-class>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <servlet-class>org.schlibbuz.sa723.WelcomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/home.do</url-pattern>
+        <servlet-name>WelcomeServlet</servlet-name>
+        <url-pattern></url-pattern>
     </servlet-mapping>
     <!-- End -->
 
