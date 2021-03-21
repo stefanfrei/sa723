@@ -19,7 +19,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.schlibbuz.sa723.servlet.components.ComponentFactory;
+import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
+import org.schlibbuz.sa723.web.components.ComponentType;
+import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
+
+
 
 /**
  *
@@ -42,8 +46,9 @@ public class WelcomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            out.println(ComponentFactory.getComponentToString("header.html"));
-            out.println(ComponentFactory.getComponentToString("sandbox.html"));
+            ComponentFactory fax = new SimpleComponentFactory();
+            out.println(fax.createComponent(ComponentType.HEADER).readAsString());
+            out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
             
             try {
                 // Obtain our environment naming context
@@ -65,7 +70,7 @@ public class WelcomeServlet extends HttpServlet {
                 out.println(e.getMessage());
             }
 
-            out.println(ComponentFactory.getComponentToString("footer.html"));
+            out.println(fax.createComponent(ComponentType.FOOTER).readAsString());
         }
     }
 
