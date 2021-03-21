@@ -11,6 +11,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+
 public class LogFilter implements Filter {
 
 	public void doFilter(ServletRequest req, ServletResponse res,
@@ -27,7 +28,8 @@ public class LogFilter implements Filter {
             + request.getRequestURL()
         );
 		
-		chain.doFilter(req, res);
+        chain.doFilter(req, res);
+
 	}
 
 	public void init(FilterConfig config) throws ServletException {

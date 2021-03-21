@@ -45,33 +45,31 @@ public class WelcomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            ComponentFactory fax = new SimpleComponentFactory();
-            out.println(fax.createComponent(ComponentType.HEADER).readAsString());
-            out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
-            
-            try {
-                // Obtain our environment naming context
-                Context initCtx = new InitialContext();
-                Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-                // Look up our data source
-                DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
+        PrintWriter out = response.getWriter();
+        ComponentFactory fax = new SimpleComponentFactory();
+        out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
+        
+        try {
+            // get jndi-context
+            Context initCtx = new InitialContext();
+            Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-                // Allocate and use a connection from the pool
-                try (Connection conn = ds.getConnection()) {
-                    out.println(conn.getSchema());
-                    out.println(conn.isClosed());
-                } catch (SQLException e) {
-                    out.println(e.getMessage());
-                }
+            // Look up our data source
+            DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
 
-            } catch (NamingException e) {
+            // Allocate and use a connection from the pool
+            try (Connection conn = ds.getConnection()) {
+                out.println(conn.getSchema());
+                out.println(conn.isClosed());
+            } catch (SQLException e) {
                 out.println(e.getMessage());
             }
 
-            out.println(fax.createComponent(ComponentType.FOOTER).readAsString());
+        } catch (NamingException e) {
+            out.println(e.getMessage());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
