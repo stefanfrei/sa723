@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path=""/>
+<Context path="">
+    <ResourceLink
+    name="jdbc/Sandbox"
+    global="jdbc/Sandbox"
+    type="javax.sql.DataSource"
+  />
+</Context>

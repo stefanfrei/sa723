@@ -16,11 +16,8 @@
   limitations under the License.
 -->
 <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
-                      https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
-         version="5.0"
-         metadata-complete="true">
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
+                      https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd" version="5.0" metadata-complete="true">
 
     <display-name>Sandbox-App</display-name>
     <description>
@@ -28,18 +25,17 @@
     </description>
 
     <!-- Servlets -->
-    <!--<servlet>
+    <servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>org.schlibbuz.sa723.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
-        <url-pattern>/</url-pattern>
-    </servlet-mapping>-->
+        <url-pattern>/home.do</url-pattern>
+    </servlet-mapping>
     <!-- End -->
-    
+
     <!-- Security-Stuff -->
-    <!--
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Entire Application</web-resource-name>
@@ -49,6 +45,8 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    -->
     <!-- End -->
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>
