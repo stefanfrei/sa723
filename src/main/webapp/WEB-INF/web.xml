@@ -24,14 +24,25 @@
         Exploring Tomcat once again
     </description>
 
+    <!-- Camel Filters-->
+    <filter>
+        <filter-name>LogFilter</filter-name>
+        <filter-class>org.schlibbuz.sa723.web.filters.LogFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LogFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Listeners-->
     <listener>
-        <listener-class>org.schlibbuz.sa723.AppInitListener</listener-class>
+        <listener-class>org.schlibbuz.sa723.web.listeners.AppInitListener</listener-class>
     </listener>
 
     <!-- Servlets -->
     <servlet>
         <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>org.schlibbuz.sa723.WelcomeServlet</servlet-class>
+        <servlet-class>org.schlibbuz.sa723.web.servlets.WelcomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>

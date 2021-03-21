@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.schlibbuz.sa723;
+package org.schlibbuz.sa723.web.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
