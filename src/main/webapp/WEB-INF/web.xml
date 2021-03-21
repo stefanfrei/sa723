@@ -28,17 +28,18 @@
     </description>
 
     <!-- Servlets -->
-    <servlet>
+    <!--<servlet>
         <servlet-name>HomeServlet</servlet-name>
         <servlet-class>org.schlibbuz.sa723.HomeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HomeServlet</servlet-name>
         <url-pattern>/</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <!-- End -->
     
     <!-- Security-Stuff -->
+    <!--
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Entire Application</web-resource-name>
@@ -48,5 +49,6 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
+    -->
     <!-- End -->
 </web-app>
