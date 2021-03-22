@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
-import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
+import org.schlibbuz.sa723.web.components.factory.CachedComponentFactory;
 import org.schlibbuz.sa723.web.components.ComponentType;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
@@ -47,7 +47,7 @@ public class WelcomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try(PrintWriter out = response.getWriter()) {
-            ComponentFactory fax = SimpleComponentFactory.getInstance();
+            ComponentFactory fax = CachedComponentFactory.getInstance();
             out.println(fax.createComponent(ComponentType.HEADER).readAsString());
             out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
             

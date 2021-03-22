@@ -34,6 +34,8 @@ public class AppInitListener
             appPath + "/WEB-INF/templates"
         );
 
+        System.setProperty("sandbox.app.charset", "UTF-8");
+
         System.setProperty("sandbox.app.templates.suffix", ".html");
     }
 }
