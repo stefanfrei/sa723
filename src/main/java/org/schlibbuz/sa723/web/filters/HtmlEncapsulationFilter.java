@@ -22,6 +22,10 @@ public class HtmlEncapsulationFilter implements Filter {
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
 		
 		if (request.getRequestURL().toString().endsWith("/") || request.getRequestURL().toString().endsWith(".do")) {
             System.out.println("html-header needed");
@@ -30,7 +34,6 @@ public class HtmlEncapsulationFilter implements Filter {
 		
         chain.doFilter(req, res);
 
-        HttpServletResponse response = (HttpServletResponse) res;
 
         if (response.getContentType().startsWith("text/html")) {
             response.setContentType("text/html;charset=UTF-8");
