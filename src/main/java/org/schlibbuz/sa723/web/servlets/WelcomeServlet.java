@@ -47,7 +47,7 @@ public class WelcomeServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         try(PrintWriter out = response.getWriter()) {
-            ComponentFactory fax = new SimpleComponentFactory();
+            ComponentFactory fax = SimpleComponentFactory.getInstance();
             out.println(fax.createComponent(ComponentType.HEADER).readAsString());
             out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
             
