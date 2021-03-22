@@ -1,8 +1,8 @@
 package org.schlibbuz.sa723.web.components.factory;
 
-import java.util.ArrayList;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Timer;
 
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
@@ -11,15 +11,24 @@ public final class CachedComponentFactory implements ComponentFactory {
 
 
     private static CachedComponentFactory instance = null;
-    private List<String> changedFiles;
-    private Timer timer;
-    FileSystemPoll fsp;
+    private final DirectoryObserver directoryObserver;
 
     private CachedComponentFactory() {
-        changedFiles = new ArrayList<>();
-        timer = new Timer();
-        fsp = new FileSystemPoll();
-        timer.scheduleAtFixedRate(fsp, 10000, 5000);
+        directoryObserver = initCompFax();
+        directoryObserver.processEvents();
+    }
+
+    private static DirectoryObserver initCompFax() {
+        try {
+            return new DirectoryObserver(
+                Paths.get(
+                    System.getProperty("sandbox.app.templates.folder")
+                )
+            );
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 
     public static CachedComponentFactory getInstance() {
