@@ -44,6 +44,9 @@ public class DirectoryObserver {
     private boolean trace = false;
 
 
+    /**
+     * Creates a DirectoryObserver and registers the given directory
+     */
     DirectoryObserver(Path dir) throws IOException {
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey,Path>();
@@ -57,6 +60,7 @@ public class DirectoryObserver {
         // enable trace after initial registration
         this.trace = true;
     }
+
 
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) {
@@ -98,10 +102,6 @@ public class DirectoryObserver {
         });
     }
 
-    /**
-     * Creates a WatchService and registers the given directory
-     */
-    
 
     /**
      * Process all events for keys queued to the watcher
