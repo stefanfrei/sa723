@@ -45,13 +45,14 @@ public class WelcomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+
+        try(PrintWriter out = response.getWriter()) {
             ComponentFactory fax = new SimpleComponentFactory();
             out.println(fax.createComponent(ComponentType.HEADER).readAsString());
             out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
             
             try {
-                // Obtain our environment naming context
+                // get jndi-context
                 Context initCtx = new InitialContext();
                 Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
@@ -72,6 +73,7 @@ public class WelcomeServlet extends HttpServlet {
 
             out.println(fax.createComponent(ComponentType.FOOTER).readAsString());
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
