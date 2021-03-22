@@ -28,7 +28,6 @@ public class HtmlEncapsulationFilter implements Filter {
         response.setCharacterEncoding("UTF-8");
 		
 		if (request.getRequestURL().toString().endsWith("/") || request.getRequestURL().toString().endsWith(".do")) {
-            System.out.println("html-header needed");
             res.getWriter().println(new SimpleComponentFactory().createComponent(ComponentType.HEADER).readAsString());
         }
 		
@@ -36,9 +35,6 @@ public class HtmlEncapsulationFilter implements Filter {
 
 
         if (response.getContentType().startsWith("text/html")) {
-            response.setContentType("text/html;charset=UTF-8");
-            response.setCharacterEncoding("UTF-8");
-            System.out.println("html-footer needed");
             try(PrintWriter out = response.getWriter()) {
                 out.println(new SimpleComponentFactory().createComponent(ComponentType.FOOTER).readAsString());
             }
