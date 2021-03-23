@@ -101,8 +101,8 @@ public final class CachedComponentFactory implements ComponentFactory {
 
         if (filename.startsWith(TEMPLATES_FOLDER) && filename.endsWith(TEMPLATES_SUFFIX)) {
             int startIndex = TEMPLATES_FOLDER.length();
-            int endIndex = TEMPLATES_SUFFIX.length();
-            return filename.substring(startIndex, endIndex);
+            int length = filename.length() - (TEMPLATES_FOLDER.length() + TEMPLATES_SUFFIX.length());
+            return filename.substring(startIndex, length).toLowerCase();
         }
         return null;
     }
