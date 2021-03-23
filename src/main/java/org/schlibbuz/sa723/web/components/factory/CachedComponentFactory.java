@@ -3,7 +3,6 @@ package org.schlibbuz.sa723.web.components.factory;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,17 +14,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.apache.commons.io.FileUtils;
-
+import org.schlibbuz.sa723.web.components.BasicComponent;
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
 
-public final class CachedComponentFactory implements ComponentFactory {
+public final class CachedComponentFactory extends AComponentFactory {
 
-
-    private static CachedComponentFactory instance = null;
-    private static final Charset CHARSET = Charset.forName(System.getProperty("sandbox.app.charset"));
-    private static final String TEMPLATES_FOLDER = System.getProperty("sandbox.app.templates.folder");
-    private static final String TEMPLATES_SUFFIX = System.getProperty("sandbox.app.templates.suffix");
 
     private final DirectoryObserver directoryObserver;
     private final Map<String, Component> templateCache;
@@ -55,7 +49,7 @@ public final class CachedComponentFactory implements ComponentFactory {
         if(instance == null) {
             instance = new CachedComponentFactory();
         }
-        return instance;
+        return (CachedComponentFactory)instance; // Smells, try to avoid hardcast.
     }
     // Constructor Part end
 

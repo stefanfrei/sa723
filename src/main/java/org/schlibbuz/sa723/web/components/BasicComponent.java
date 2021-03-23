@@ -1,13 +1,13 @@
-package org.schlibbuz.sa723.web.components.factory;
+package org.schlibbuz.sa723.web.components;
 
 
 import java.nio.charset.Charset;
 
-import org.schlibbuz.sa723.web.components.Component;
-import org.schlibbuz.sa723.web.components.ComponentType;
 
 
-public class BasicComponent implements Component {
+public class BasicComponent extends AComponent {
+
+
     private final ComponentType componentType;
     private final Charset encoding;
 

@@ -2,22 +2,15 @@ package org.schlibbuz.sa723.web.components.factory;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 
+import org.schlibbuz.sa723.web.components.BasicComponent;
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
 
-public final class SimpleComponentFactory implements ComponentFactory {
-
-
-    private static SimpleComponentFactory instance = null;
-
-    private static final Charset CHARSET = Charset.forName(System.getProperty("sandbox.app.charset"));
-    private static final String TEMPLATES_FOLDER = System.getProperty("sandbox.app.templates.folder");
-    private static final String TEMPLATES_SUFFIX = System.getProperty("sandbox.app.templates.suffix");
+public final class SimpleComponentFactory extends AComponentFactory {
 
 
     // Constructor part
@@ -29,7 +22,7 @@ public final class SimpleComponentFactory implements ComponentFactory {
         if(instance == null) {
             instance = new SimpleComponentFactory();
         }
-        return instance;
+        return (SimpleComponentFactory)instance; // Smells, try to avoid hardcast.
     }
     // Constructor part end
 
