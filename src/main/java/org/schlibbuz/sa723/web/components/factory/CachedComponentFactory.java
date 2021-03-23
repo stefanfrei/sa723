@@ -61,7 +61,7 @@ public final class CachedComponentFactory implements ComponentFactory {
 
 
     private void initTemplateCache() {
-
+        System.out.println("Initializing template-cache...");
         String basePath = TEMPLATES_FOLDER;
 
         try (Stream<Path> walk = Files.walk(
@@ -74,6 +74,7 @@ public final class CachedComponentFactory implements ComponentFactory {
 
             fileNames.forEach(filename -> {
                 String hashKey = getHashKeyFromFileName(filename);
+                System.out.print("adding file " + filename + " with key -> " + hashKey + "...");
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
@@ -89,11 +90,21 @@ public final class CachedComponentFactory implements ComponentFactory {
                 } catch(IOException e) {
                     System.out.println(e.getMessage());
                 }
+                System.out.println("done!");
             });
-
+            printCache();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
+    }
+
+
+    private void printCache() {
+        System.out.println("Cache populated!");
+        templateCache.forEach(
+            (key, value)
+                -> System.out.println(key + " = " + value));
+        System.out.println("-------------------");
     }
 
 
@@ -107,15 +118,22 @@ public final class CachedComponentFactory implements ComponentFactory {
         return null;
     }
 
+
     @Override
     public Component createComponent(final ComponentType componentType) {
-        return templateCache.get(componentType.toString());
+        return templateCache.get(componentType.getName());
     }
+
 
     @Override
     public Component createComponent(ComponentType componentType, List<String> params) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+
+    public static void shutdown() {
+        // ? how
     }
 
 }

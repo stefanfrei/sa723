@@ -42,6 +42,7 @@ public class DirectoryObserver {
     private final Map<WatchKey,Path> keys;
     private final boolean recursive;
     private boolean trace = false;
+    private boolean shouldRun = false;
 
 
     /**
@@ -59,6 +60,7 @@ public class DirectoryObserver {
 
         // enable trace after initial registration
         this.trace = true;
+        this.shouldRun = true;
     }
 
 
@@ -107,7 +109,7 @@ public class DirectoryObserver {
      * Process all events for keys queued to the watcher
      */
     void processEvents() {
-        for (;;) {
+        for (;shouldRun;) {
 
             // wait for key to be signalled
             WatchKey key;
@@ -164,6 +166,16 @@ public class DirectoryObserver {
                 }
             }
         }
+    }
+
+
+    void enableProcessEvents() {
+        this.shouldRun = true;
+    }
+
+
+    void disableProcessEvents() {
+        this.shouldRun = false;
     }
 
 }
