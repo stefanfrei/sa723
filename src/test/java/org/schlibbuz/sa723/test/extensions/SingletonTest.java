@@ -21,7 +21,7 @@
  * THE SOFTWARE.
  */
 
-package org.schlibbuz.sa723;
+package org.schlibbuz.sa723.test.extensions;
 
 
 import static java.time.Duration.ofMillis;
