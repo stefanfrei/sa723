@@ -119,7 +119,7 @@ public class DirectoryObserver {
 
             Path dir = keys.get(key);
             if (dir == null) {
-                System.err.println("WatchKey not recognized!!");
+                System.out.println("WatchKey not recognized!!");
                 continue;
             }
 

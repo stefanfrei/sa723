@@ -31,7 +31,7 @@ public class HtmlModifier {
                 );
             }
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
