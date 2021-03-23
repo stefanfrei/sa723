@@ -173,7 +173,7 @@ public class DirectoryObserver {
         this.shouldRun = true;
     }
 
-
+    // Tomcat doesnt like infinite loops, control from outside is needed.
     void disableProcessEvents() {
         this.shouldRun = false;
     }

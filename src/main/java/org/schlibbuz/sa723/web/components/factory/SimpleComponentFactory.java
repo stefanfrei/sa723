@@ -30,7 +30,7 @@ public final class SimpleComponentFactory extends AComponentFactory {
     @Override
     public Component createComponent(ComponentType componentType) {
         File file = new File(
-            TEMPLATES_FOLDER + "/" + TEMPLATES_SUFFIX
+            TEMPLATES_FOLDER + "/" + componentType.getName() + TEMPLATES_SUFFIX // access to root-dir would be ugly
         );
         try {
             return new BasicComponent(
