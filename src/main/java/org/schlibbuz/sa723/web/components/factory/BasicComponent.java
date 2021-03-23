@@ -1,10 +1,7 @@
 package org.schlibbuz.sa723.web.components.factory;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
 
-import org.apache.commons.io.FileUtils;
+import java.nio.charset.Charset;
 
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
@@ -12,39 +9,32 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 
 public class BasicComponent implements Component {
     private final ComponentType componentType;
-    private final String encoding;
-    private final String absoluteFile;
+    private final Charset encoding;
 
-    public BasicComponent(final ComponentType componentType) {
+    private String data;
+
+    public BasicComponent(ComponentType componentType, String data) {
         this.componentType = componentType;
-        encoding = "UTF-8";
-        absoluteFile = System.getProperty("sandbox.app.templates.folder")
-                     + "/" + this.componentType.toString()
-                     + System.getProperty("sandbox.app.templates.suffix");
+        encoding = Charset.forName(System.getProperty("sandbox.app.encoding"));
+        this.data = data;
     }
 
-    private File getFile() {
-        return new File(absoluteFile);
-    }
 
     @Override
-    public String readAsString() {
-        try {
-            return FileUtils.readFileToString(getFile(), encoding);
-        } catch(IOException | java.nio.charset.UnsupportedCharsetException e) {
-            System.err.println("File error -> " + e.getMessage());
-        }
-        return null;
+    public ComponentType getComponentType() {
+        return componentType;
     }
 
+
     @Override
-    public List<String> readAsList() {
-        try {
-            return FileUtils.readLines(getFile(), encoding);
-        } catch(IOException | java.nio.charset.UnsupportedCharsetException e) {
-            System.err.println("File error -> " + e.getMessage());
-        }
-        return null;
+    public Charset getEncoding() {
+        return encoding;
     }
-    
+
+
+    @Override
+    public String getData() {
+        return data;
+    }
+
 }

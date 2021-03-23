@@ -3,7 +3,7 @@ package org.schlibbuz.sa723.web.components.factory;
 
 import java.io.File;
 import java.io.IOException;
-
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,10 +23,12 @@ public final class CachedComponentFactory implements ComponentFactory {
 
 
     private static CachedComponentFactory instance = null;
-    private static final String templateDir = System.getProperty("sandbox.app.templates.folder");
+    private static final Charset CHARSET = Charset.forName(System.getProperty("sandbox.app.charset"));
+    private static final String TEMPLATES_FOLDER = System.getProperty("sandbox.app.templates.folder");
+    private static final String TEMPLATES_SUFFIX = System.getProperty("sandbox.app.templates.suffix");
 
     private final DirectoryObserver directoryObserver;
-    private final Map<String, String> templateCache;
+    private final Map<String, Component> templateCache;
 
     // Constructor part
     private CachedComponentFactory() {
@@ -40,7 +42,7 @@ public final class CachedComponentFactory implements ComponentFactory {
     private static DirectoryObserver initCompFax() {
         try {
             return new DirectoryObserver(
-                Paths.get(templateDir)
+                Paths.get(TEMPLATES_FOLDER)
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());
@@ -60,7 +62,7 @@ public final class CachedComponentFactory implements ComponentFactory {
 
     private void initTemplateCache() {
 
-        String basePath = CachedComponentFactory.templateDir;
+        String basePath = TEMPLATES_FOLDER;
 
         try (Stream<Path> walk = Files.walk(
             Paths.get(basePath)
@@ -71,15 +73,19 @@ public final class CachedComponentFactory implements ComponentFactory {
             ).collect(Collectors.toList());
 
             fileNames.forEach(filename -> {
-                System.out.println(filename);
-                String relativeFile = filename.replace(basePath, ""); // rel filename as hash-key
-                System.out.println(relativeFile);
+                String hashKey = getHashKeyFromFileName(filename);
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
-                        System.getProperty("sandbox.app.charset")
+                        CHARSET
                     );
-                    templateCache.put(relativeFile, fileContent);
+                    templateCache.put(
+                        hashKey,
+                        new BasicComponent(
+                            ComponentType.fromName(hashKey),
+                            fileContent
+                        )
+                    );
                 } catch(IOException e) {
                     System.err.println(e.getMessage());
                 }
@@ -90,10 +96,20 @@ public final class CachedComponentFactory implements ComponentFactory {
         }
     }
 
-    @Override
-    public Component createComponent(ComponentType componentType) {
-        // TODO Auto-generated method stub
+
+    private String getHashKeyFromFileName(final String filename) {
+
+        if (filename.startsWith(TEMPLATES_FOLDER) && filename.endsWith(TEMPLATES_SUFFIX)) {
+            int startIndex = TEMPLATES_FOLDER.length();
+            int endIndex = TEMPLATES_SUFFIX.length();
+            return filename.substring(startIndex, endIndex);
+        }
         return null;
+    }
+
+    @Override
+    public Component createComponent(final ComponentType componentType) {
+        return templateCache.get(componentType.toString());
     }
 
     @Override

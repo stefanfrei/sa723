@@ -26,16 +26,9 @@ public class AppInitListener
 
         String appPath = System.getProperty("catalina.base") + "/webapps/ROOT";
 
-
         System.setProperty("sandbox.app.root", appPath);
-
-        System.setProperty(
-            "sandbox.app.templates.folder",
-            appPath + "/WEB-INF/templates"
-        );
-
         System.setProperty("sandbox.app.charset", "UTF-8");
-
+        System.setProperty("sandbox.app.templates.folder", appPath + "/WEB-INF/templates");
         System.setProperty("sandbox.app.templates.suffix", ".html");
     }
 }

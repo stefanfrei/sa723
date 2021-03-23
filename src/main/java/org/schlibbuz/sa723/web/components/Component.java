@@ -1,8 +1,9 @@
 package org.schlibbuz.sa723.web.components;
 
-import java.util.List;
+import java.nio.charset.Charset;
 
 public interface Component {
-    public String readAsString();
-    public List<String> readAsList();
+    public ComponentType getComponentType();
+    public Charset getEncoding();
+    public String getData();
 }

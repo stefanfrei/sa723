@@ -48,8 +48,8 @@ public class WelcomeServlet extends HttpServlet {
 
         try(PrintWriter out = response.getWriter()) {
             ComponentFactory fax = CachedComponentFactory.getInstance();
-            out.println(fax.createComponent(ComponentType.HEADER).readAsString());
-            out.println(fax.createComponent(ComponentType.SANDBOX).readAsString());
+            out.println(fax.createComponent(ComponentType.HEADER).getData());
+            out.println(fax.createComponent(ComponentType.SANDBOX).getData());
             
             try {
                 // get jndi-context
@@ -71,7 +71,7 @@ public class WelcomeServlet extends HttpServlet {
                 out.println(e.getMessage());
             }
 
-            out.println(fax.createComponent(ComponentType.FOOTER).readAsString());
+            out.println(fax.createComponent(ComponentType.FOOTER).getData());
         }
 
     }
