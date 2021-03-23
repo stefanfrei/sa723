@@ -1,10 +1,28 @@
+/*
+ * The MIT License
+ * Copyright © 2014-2021 Stefan Frei
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
+ */
+
 package org.schlibbuz.sa723.web.components.factory;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import java.io.IOException;
 
@@ -27,7 +45,6 @@ import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
-import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
 
 
 /**
@@ -69,9 +86,8 @@ public class DirectoryObserver {
         return (WatchEvent<T>)event;
     }
 
-    /**
-     * Register the given directory with the WatchService
-     */
+
+    // Register dir to be observed.
     private void register(Path dir) throws IOException {
         WatchKey key = dir.register(watcher, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
         if (trace) {
@@ -87,12 +103,10 @@ public class DirectoryObserver {
         keys.put(key, dir);
     }
 
-    /**
-     * Register the given directory, and all its sub-directories, with the
-     * WatchService.
-     */
+
+    // Register dir to be observed (recursive variant).
     private void registerAll(final Path start) throws IOException {
-        // register directory and sub-directories
+
         Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs)
@@ -105,13 +119,11 @@ public class DirectoryObserver {
     }
 
 
-    /**
-     * Process all events for keys queued to the watcher
-     */
+    // Listen for file-changes.
     void processEvents() {
-        for (;shouldRun;) {
 
-            // wait for key to be signalled
+        while (shouldRun) {
+
             WatchKey key;
             try {
                 key = watcher.take();
@@ -121,7 +133,7 @@ public class DirectoryObserver {
 
             Path dir = keys.get(key);
             if (dir == null) {
-                System.out.println("WatchKey not recognized!!");
+                System.out.println("unsupported file-event");
                 continue;
             }
 
@@ -129,10 +141,6 @@ public class DirectoryObserver {
                 @SuppressWarnings("rawtypes")
                 WatchEvent.Kind kind = event.kind();
 
-                // TBD - provide example of how OVERFLOW event is handled
-                if (kind == OVERFLOW) {
-                    continue;
-                }
 
                 // Context for directory entry event is the file name of entry
                 WatchEvent<Path> ev = cast(event);
@@ -149,8 +157,8 @@ public class DirectoryObserver {
                         if (Files.isDirectory(child, NOFOLLOW_LINKS)) {
                             registerAll(child);
                         }
-                    } catch (IOException x) {
-                        // ignore to keep sample readbale
+                    } catch (IOException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
             }
@@ -168,7 +176,7 @@ public class DirectoryObserver {
         }
     }
 
-
+    // this is only here for consistence, rarely used maybe.
     void enableProcessEvents() {
         this.shouldRun = true;
     }
