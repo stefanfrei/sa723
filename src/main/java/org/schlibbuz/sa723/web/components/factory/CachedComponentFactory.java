@@ -150,14 +150,13 @@ public final class CachedComponentFactory extends AComponentFactory {
 
     @Override
     public Component createComponent(ComponentType componentType, List<String> params) {
-        // TODO Auto-generated method stub
-        return null;
+        return null; // implement!
     }
 
 
     @Override
     public void cleanup() {
-
+        directoryObserver.disableProcessEvents();
     }
 
 

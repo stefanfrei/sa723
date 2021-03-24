@@ -23,37 +23,71 @@
 
 package org.schlibbuz.sa723.web.listeners;
 
-/**
- *
- * @author Stefan
- */
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
+import org.schlibbuz.sa723.web.components.factory.CachedComponentFactory;
+import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
 
 
 public class AppInitListener implements ServletContextListener {
 
 
+    private ComponentFactory fax;
+
+
+
     // Webapp startup-hook
     @Override
-    public void contextInitialized(ServletContextEvent arg0) {
+    public void contextInitialized(ServletContextEvent event) {
 
-        String appPath = System.getProperty("catalina.base") + "/webapps/ROOT";
+        ServletContext ctx = event.getServletContext();
 
-        System.setProperty("sandbox.app.root", appPath);
-        System.setProperty("sandbox.app.charset", "UTF-8");
-        System.setProperty("sandbox.app.templates.folder", appPath + "/WEB-INF/templates");
-        System.setProperty("sandbox.app.templates.suffix", ".html");
-        System.setProperty("sandbox.app.cleanup.maxwait", "20000");
+        String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
+
+        ctx.setAttribute("app.props", loadProps(appRoot));
+
+        fax = CachedComponentFactory.getInstance();
+        ctx.setAttribute("template.factory", fax);
+
     }
-
 
 
     // Webapp shutdown-hook
     @Override
-    public void contextDestroyed(ServletContextEvent arg0) {
+    public void contextDestroyed(ServletContextEvent event) {
+
         System.out.println("ServletContextListener destroyed");
+        fax.cleanup();
+
+    }
+
+
+
+    private Properties loadProps(String appRoot) {
+
+        try(InputStream input = new FileInputStream("ROOT/WEB-INF/app.props")) {
+
+            Properties props = new Properties();
+            props.load(input);
+            props.setProperty("app.root", appRoot);
+            props.forEach((key, val) -> {
+                System.out.println(key + " -> " + val);
+            });
+            return props;
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        return null;
     }
 
 }
