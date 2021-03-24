@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
 import org.schlibbuz.sa723.web.components.ComponentType;
-import org.schlibbuz.sa723.web.components.factory.CachedComponentFactory;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
 
@@ -66,8 +66,11 @@ public class WelcomeServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+
         try(PrintWriter out = response.getWriter()) {
-            ComponentFactory fax = CachedComponentFactory.getInstance();
+            ServletContext ctx = getServletContext();
+            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("template.factory");
+
             out.println(fax.createComponent(ComponentType.HEADER).getData());
             out.println(fax.createComponent(ComponentType.SANDBOX).getData());
             

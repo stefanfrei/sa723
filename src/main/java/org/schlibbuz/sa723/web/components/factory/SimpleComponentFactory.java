@@ -41,11 +41,11 @@ public final class SimpleComponentFactory extends AComponentFactory {
 
 
     // get factory via this method
-    public static SimpleComponentFactory getInstance() {
+    public static ComponentFactory getInstance() {
         if(instance == null) {
             instance = new SimpleComponentFactory();
         }
-        return (SimpleComponentFactory)instance; // Smells, try to avoid hardcast.
+        return instance;
     }
     // Constructor part end
 
@@ -53,12 +53,15 @@ public final class SimpleComponentFactory extends AComponentFactory {
     @Override
     public Component createComponent(ComponentType componentType) {
         File file = new File(
-            TEMPLATES_FOLDER + "/" + componentType.getName() + TEMPLATES_SUFFIX // access to root-dir would be ugly
+            AComponentFactory.props.getProperty("app.templates.folder")
+            + "/"
+            + componentType.getName()
+            + AComponentFactory.props.getProperty("app.templates.suffix") // access to root-dir would be ugly
         );
         try {
             return new BasicComponent(
                 componentType,
-                FileUtils.readFileToString(file, CHARSET)
+                FileUtils.readFileToString(file, AComponentFactory.props.getProperty("app.encoding"))
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());

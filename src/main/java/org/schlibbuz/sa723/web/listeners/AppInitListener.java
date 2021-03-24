@@ -52,9 +52,10 @@ public class AppInitListener implements ServletContextListener {
 
         String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
 
-        ctx.setAttribute("app.props", loadProps(appRoot));
+        Properties props = loadProps(appRoot);
+        ctx.setAttribute("app.props", props);
 
-        fax = CachedComponentFactory.getInstance();
+        fax = CachedComponentFactory.getInstance(props);
         ctx.setAttribute("template.factory", fax);
 
     }

@@ -23,8 +23,8 @@
 
 package org.schlibbuz.sa723.web.components.factory;
 
-import java.nio.charset.Charset;
 import java.util.List;
+import java.util.Properties;
 
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
@@ -34,11 +34,9 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 abstract class AComponentFactory implements ComponentFactory {
 
 
-    static final Charset CHARSET = Charset.forName(System.getProperty("sandbox.app.charset"));
-    static final String TEMPLATES_FOLDER = System.getProperty("sandbox.app.templates.folder");
-    static final String TEMPLATES_SUFFIX = System.getProperty("sandbox.app.templates.suffix");
+    static ComponentFactory instance;
 
-    static AComponentFactory instance;
+    static Properties props;
 
 
 
@@ -55,7 +53,7 @@ abstract class AComponentFactory implements ComponentFactory {
     public void cleanup() {
         this.cleanup(
             Long.valueOf(
-                System.getProperty("sandbox.app.cleanup.maxwait"),
+                props.getProperty("app.cleanup.maxwait"),
                 10 //radix
             )
         );

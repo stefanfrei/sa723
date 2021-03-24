@@ -32,6 +32,7 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -45,6 +46,9 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 
 public final class CachedComponentFactory extends AComponentFactory {
 
+
+    private static final String TEMPLATES_FOLDER = AComponentFactory.props.getProperty("app.templates.folder");
+    private static final String TEMPLATES_SUFFIX = AComponentFactory.props.getProperty("app.templates.suffix");
 
     private final DirectoryObserver directoryObserver;
     private final Map<String, Component> templateCache;
@@ -74,18 +78,19 @@ public final class CachedComponentFactory extends AComponentFactory {
 
 
     // get factory via this method
-    public static CachedComponentFactory getInstance() {
+    public static ComponentFactory getInstance(Properties props) {
         if(instance == null) {
             instance = new CachedComponentFactory();
+            AComponentFactory.props = props;
         }
-        return (CachedComponentFactory)instance; // Smells, try to avoid hardcast.
+        return instance;
     }
     // Constructor Part end
 
 
     private void initTemplateCache() {
         System.out.println("Initializing template-cache...");
-        String basePath = TEMPLATES_FOLDER;
+        String basePath = AComponentFactory.props.getProperty("app.templates.folder");
 
         try (Stream<Path> walk = Files.walk(
             Paths.get(basePath)
@@ -101,7 +106,7 @@ public final class CachedComponentFactory extends AComponentFactory {
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
-                        CHARSET
+                        AComponentFactory.props.getProperty("app.encoding")
                     );
                     templateCache.put(
                         hashKey,
