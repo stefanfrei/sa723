@@ -32,7 +32,6 @@ import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -54,7 +53,8 @@ public final class CachedComponentFactory extends AComponentFactory {
 
     // Constructor part
     private CachedComponentFactory() {
-        directoryObserver = initCompFax();
+        super();
+        directoryObserver = initCompFax(templatesFolder);
         directoryObserver.processEvents();
         templateCache = new HashMap<>();
         initTemplateCache();
@@ -62,10 +62,10 @@ public final class CachedComponentFactory extends AComponentFactory {
 
 
     // used in constructor to support final var
-    private static DirectoryObserver initCompFax() {
+    private static DirectoryObserver initCompFax(final String templatesFolder) {
         try {
             return new DirectoryObserver(
-                Paths.get(TEMPLATES_FOLDER)
+                Paths.get(templatesFolder)
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());
@@ -75,7 +75,7 @@ public final class CachedComponentFactory extends AComponentFactory {
 
 
     // get factory via this method
-    public static ComponentFactory getInstance(Properties props) {
+    public static ComponentFactory getInstance() {
         if(instance == null) {
             instance = new CachedComponentFactory();
         }
@@ -86,7 +86,7 @@ public final class CachedComponentFactory extends AComponentFactory {
 
     private void initTemplateCache() {
         System.out.println("Initializing template-cache...");
-        String basePath = TEMPLATES_FOLDER;
+        String basePath = templatesFolder;
 
         try (Stream<Path> walk = Files.walk(
             Paths.get(basePath)
@@ -102,7 +102,7 @@ public final class CachedComponentFactory extends AComponentFactory {
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
-                        CHARSET
+                        charset
                     );
                     templateCache.put(
                         hashKey,
@@ -134,9 +134,9 @@ public final class CachedComponentFactory extends AComponentFactory {
 
     private String getHashKeyFromFileName(final String filename) {
 
-        if (filename.startsWith(TEMPLATES_FOLDER) && filename.endsWith(TEMPLATES_SUFFIX)) {
-            int startIndex = TEMPLATES_FOLDER.length();
-            int length = filename.length() - (TEMPLATES_FOLDER.length() + TEMPLATES_SUFFIX.length());
+        if (filename.startsWith(templatesFolder) && filename.endsWith(templatesSuffix)) {
+            int startIndex = templatesFolder.length();
+            int length = filename.length() - (templatesFolder.length() + templatesSuffix.length());
             return filename.substring(startIndex, length).toLowerCase();
         }
         return null;

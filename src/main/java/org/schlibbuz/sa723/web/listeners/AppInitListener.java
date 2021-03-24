@@ -54,7 +54,7 @@ public class AppInitListener implements ServletContextListener {
         Properties props = loadProps(appRoot, ctx);
         ctx.setAttribute("app.props", props);
 
-        fax = CachedComponentFactory.getInstance(props);
+        fax = CachedComponentFactory.getInstance();
         ctx.setAttribute("template.factory", fax);
 
     }

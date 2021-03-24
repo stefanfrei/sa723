@@ -37,7 +37,9 @@ public final class SimpleComponentFactory extends AComponentFactory {
 
 
     // Constructor part
-    private SimpleComponentFactory() {}
+    private SimpleComponentFactory() {
+        super();
+    }
 
 
     // get factory via this method
@@ -53,15 +55,15 @@ public final class SimpleComponentFactory extends AComponentFactory {
     @Override
     public Component createComponent(ComponentType componentType) {
         File file = new File(
-            TEMPLATES_FOLDER
+            templatesFolder
             + "/"
             + componentType.getName()
-            + TEMPLATES_SUFFIX // access to root-dir would be ugly
+            + templatesSuffix // access to root-dir would be ugly
         );
         try {
             return new BasicComponent(
                 componentType,
-                FileUtils.readFileToString(file, CHARSET)
+                FileUtils.readFileToString(file, charset)
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());

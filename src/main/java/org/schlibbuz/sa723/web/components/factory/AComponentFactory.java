@@ -23,26 +23,55 @@
 
 package org.schlibbuz.sa723.web.components.factory;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Properties;
 
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
-import org.schlibbuz.sa723.web.components.contexts.AppContext;
 
 
 
 abstract class AComponentFactory implements ComponentFactory {
 
 
-    static final Properties PROPS = (Properties)AppContext.getCurrentInstance().getServletContext().getAttribute("app.props");
-    static final Charset CHARSET = Charset.forName(PROPS.getProperty("app.encoding"));
-    static final String TEMPLATES_FOLDER = PROPS.getProperty("app.templates.folder");
-    static final String TEMPLATES_SUFFIX = PROPS.getProperty("app.templates.suffix");
+    final Properties props;
+    final Charset charset;
+    final String templatesFolder;
+    final String templatesSuffix;
 
     static ComponentFactory instance;
 
+    protected AComponentFactory() {
+        props = this.loadProps();
+        charset = Charset.forName(props.getProperty("app.encoding"));
+        templatesFolder = props.getProperty("app.templates.folder");
+        templatesSuffix = props.getProperty("app.templates.suffix");
+    }
+
+    private Properties loadProps() {
+        try (InputStream input = AComponentFactory.class.getClassLoader().getResourceAsStream("app.props")) {
+
+            Properties props = new Properties();
+
+            if (input == null) {
+                System.out.println("Sorry, unable to find app.props");
+                return null;
+            }
+
+            props.load(input);
+
+            props.forEach((key, val) -> {
+                System.out.println(key + " -> " + val);
+            });
+            return props;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
 
     public Component createComponent(final ComponentType componentType) {
@@ -58,7 +87,7 @@ abstract class AComponentFactory implements ComponentFactory {
     public void cleanup() {
         this.cleanup(
             Long.valueOf(
-                PROPS.getProperty("app.cleanup.maxwait"),
+                props.getProperty("app.cleanup.maxwait"),
                 10 //radix
             )
         );
