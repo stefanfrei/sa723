@@ -21,52 +21,48 @@
  * THE SOFTWARE.
  */
 
-package org.schlibbuz.sa723.web.components.factory;
+package org.schlibbuz.sa723.web.filters;
 
-import java.nio.charset.Charset;
-import java.util.List;
-import java.util.Properties;
+import java.io.IOException;
 
-import org.schlibbuz.sa723.web.components.Component;
-import org.schlibbuz.sa723.web.components.ComponentType;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.schlibbuz.sa723.web.components.contexts.AppContext;
 
+public class AppContextFilter implements Filter {
 
+    
 
-abstract class AComponentFactory implements ComponentFactory {
+    @Override
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
 
-
-    static final Properties PROPS = (Properties)AppContext.getCurrentInstance().getServletContext().getAttribute("app.props");
-    static final Charset CHARSET = Charset.forName(PROPS.getProperty("app.encoding"));
-    static final String TEMPLATES_FOLDER = PROPS.getProperty("app.templates.folder");
-    static final String TEMPLATES_SUFFIX = PROPS.getProperty("app.templates.suffix");
-
-    static ComponentFactory instance;
-
-
-
-    public Component createComponent(final ComponentType componentType) {
-        return null;
+        try (AppContext context = AppContext.create(
+            (HttpServletRequest)req,
+            (HttpServletResponse)res
+        )) {
+            chain.doFilter(req, res);
+        }
+        
     }
 
 
-    public Component createComponent(final ComponentType componentType, List<String> params) {
-        return null;
+    @Override
+    public void init(FilterConfig config) throws ServletException {
+        
     }
 
 
-    public void cleanup() {
-        this.cleanup(
-            Long.valueOf(
-                PROPS.getProperty("app.cleanup.maxwait"),
-                10 //radix
-            )
-        );
+    @Override
+    public void destroy() {
+        
     }
-
-
-    public void cleanup(long maxWait) {
-
-    }
-
+    
 }

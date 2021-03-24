@@ -40,9 +40,19 @@
         <filter-name>LogFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>AppContextFilter</filter-name>
+        <filter-class>org.schlibbuz.sa723.web.filters.AppContextFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AppContextFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <!-- Filter chain order -->
     <absolute-ordering>
         <filter-name>LogFilter</filter-name>
+        <filter-name>AppContextFilter</filter-name>
     </absolute-ordering>
     <!-- End -->
 

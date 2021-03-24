@@ -47,9 +47,6 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 public final class CachedComponentFactory extends AComponentFactory {
 
 
-    private static final String TEMPLATES_FOLDER = AComponentFactory.props.getProperty("app.templates.folder");
-    private static final String TEMPLATES_SUFFIX = AComponentFactory.props.getProperty("app.templates.suffix");
-
     private final DirectoryObserver directoryObserver;
     private final Map<String, Component> templateCache;
 
@@ -81,7 +78,6 @@ public final class CachedComponentFactory extends AComponentFactory {
     public static ComponentFactory getInstance(Properties props) {
         if(instance == null) {
             instance = new CachedComponentFactory();
-            AComponentFactory.props = props;
         }
         return instance;
     }
@@ -90,7 +86,7 @@ public final class CachedComponentFactory extends AComponentFactory {
 
     private void initTemplateCache() {
         System.out.println("Initializing template-cache...");
-        String basePath = AComponentFactory.props.getProperty("app.templates.folder");
+        String basePath = TEMPLATES_FOLDER;
 
         try (Stream<Path> walk = Files.walk(
             Paths.get(basePath)
@@ -106,7 +102,7 @@ public final class CachedComponentFactory extends AComponentFactory {
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
-                        AComponentFactory.props.getProperty("app.encoding")
+                        CHARSET
                     );
                     templateCache.put(
                         hashKey,

@@ -23,7 +23,6 @@
 
 package org.schlibbuz.sa723.web.listeners;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -52,7 +51,7 @@ public class AppInitListener implements ServletContextListener {
 
         String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
 
-        Properties props = loadProps(appRoot);
+        Properties props = loadProps(appRoot, ctx);
         ctx.setAttribute("app.props", props);
 
         fax = CachedComponentFactory.getInstance(props);
@@ -72,9 +71,9 @@ public class AppInitListener implements ServletContextListener {
 
 
 
-    private Properties loadProps(String appRoot) {
+    private Properties loadProps(String appRoot, ServletContext ctx) {
 
-        try(InputStream input = new FileInputStream("ROOT/WEB-INF/app.props")) {
+        try(InputStream input = ctx.getClassLoader().getResourceAsStream("app.props")) {
 
             Properties props = new Properties();
             props.load(input);

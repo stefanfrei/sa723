@@ -53,15 +53,15 @@ public final class SimpleComponentFactory extends AComponentFactory {
     @Override
     public Component createComponent(ComponentType componentType) {
         File file = new File(
-            AComponentFactory.props.getProperty("app.templates.folder")
+            TEMPLATES_FOLDER
             + "/"
             + componentType.getName()
-            + AComponentFactory.props.getProperty("app.templates.suffix") // access to root-dir would be ugly
+            + TEMPLATES_SUFFIX // access to root-dir would be ugly
         );
         try {
             return new BasicComponent(
                 componentType,
-                FileUtils.readFileToString(file, AComponentFactory.props.getProperty("app.encoding"))
+                FileUtils.readFileToString(file, CHARSET)
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());
