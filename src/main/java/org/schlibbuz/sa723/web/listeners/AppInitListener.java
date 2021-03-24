@@ -32,15 +32,10 @@ import javax.servlet.ServletContextListener;
 
 
 
-public class AppInitListener
-               implements ServletContextListener{
+public class AppInitListener implements ServletContextListener {
 
-    @Override
-    public void contextDestroyed(ServletContextEvent arg0) {
-        System.out.println("ServletContextListener destroyed");
-    }
 
-        //Run this before web application is started
+    // Webapp startup-hook
     @Override
     public void contextInitialized(ServletContextEvent arg0) {
 
@@ -51,6 +46,14 @@ public class AppInitListener
         System.setProperty("sandbox.app.templates.folder", appPath + "/WEB-INF/templates");
         System.setProperty("sandbox.app.templates.suffix", ".html");
         System.setProperty("sandbox.app.cleanup.maxwait", "20000");
+    }
+
+
+
+    // Webapp shutdown-hook
+    @Override
+    public void contextDestroyed(ServletContextEvent arg0) {
+        System.out.println("ServletContextListener destroyed");
     }
 
 }
