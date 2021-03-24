@@ -67,6 +67,7 @@ public final class SimpleComponentFactory extends AComponentFactory {
 
     }
 
+
     @Override
     public Component createComponent(ComponentType componentType, List<String> params) {
         // TODO Auto-generated method stub

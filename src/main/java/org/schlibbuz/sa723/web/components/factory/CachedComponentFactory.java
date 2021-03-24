@@ -41,11 +41,15 @@ import org.schlibbuz.sa723.web.components.BasicComponent;
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
 
+
+
 public final class CachedComponentFactory extends AComponentFactory {
 
 
     private final DirectoryObserver directoryObserver;
     private final Map<String, Component> templateCache;
+
+
 
     // Constructor part
     private CachedComponentFactory() {
@@ -54,6 +58,7 @@ public final class CachedComponentFactory extends AComponentFactory {
         templateCache = new HashMap<>();
         initTemplateCache();
     }
+
 
     // used in constructor to support final var
     private static DirectoryObserver initCompFax() {
@@ -66,6 +71,7 @@ public final class CachedComponentFactory extends AComponentFactory {
             return null;
         }
     }
+
 
     // get factory via this method
     public static CachedComponentFactory getInstance() {
@@ -149,8 +155,15 @@ public final class CachedComponentFactory extends AComponentFactory {
     }
 
 
-    public static void shutdown() {
-        // ? how
+    @Override
+    public void cleanup() {
+
+    }
+
+
+    @Override
+    public void cleanup(long maxWait) {
+
     }
 
 }

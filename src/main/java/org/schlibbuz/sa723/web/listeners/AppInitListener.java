@@ -30,6 +30,8 @@ package org.schlibbuz.sa723.web.listeners;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+
+
 public class AppInitListener
                implements ServletContextListener{
 
@@ -48,5 +50,7 @@ public class AppInitListener
         System.setProperty("sandbox.app.charset", "UTF-8");
         System.setProperty("sandbox.app.templates.folder", appPath + "/WEB-INF/templates");
         System.setProperty("sandbox.app.templates.suffix", ".html");
+        System.setProperty("sandbox.app.cleanup.maxwait", "20000");
     }
+
 }
