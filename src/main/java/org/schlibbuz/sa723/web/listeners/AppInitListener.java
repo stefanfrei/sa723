@@ -30,6 +30,9 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import org.schlibbuz.sa723.tools.PropsLoader;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
@@ -39,6 +42,8 @@ import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
 public class AppInitListener implements ServletContextListener {
 
 
+    private static final Logger logger = LogManager.getLogger(AppInitListener.class);
+
     private ComponentFactory fax;
 
 
@@ -46,6 +51,8 @@ public class AppInitListener implements ServletContextListener {
     // Webapp startup-hook
     @Override
     public void contextInitialized(ServletContextEvent event) {
+
+        logger.trace("ServletContextListener creating");
 
         ServletContext ctx = event.getServletContext();
 
@@ -57,6 +64,8 @@ public class AppInitListener implements ServletContextListener {
         fax = SimpleComponentFactory.getInstance();
         ctx.setAttribute("template.factory", fax);
 
+        logger.trace("ServletContextListener created");
+
     }
 
 
@@ -64,8 +73,9 @@ public class AppInitListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent event) {
 
-        System.out.println("ServletContextListener destroyed");
+        logger.trace("ServletContextListener destroying");
         fax.cleanup();
+        logger.trace("ServletContextListener destroyed");
 
     }
 
