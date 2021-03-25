@@ -24,7 +24,6 @@
 package org.schlibbuz.sa723.web.components.factory;
 
 
-import java.io.File;
 import java.io.IOException;
 
 import java.nio.file.FileSystems;
@@ -67,7 +66,6 @@ public class DirectoryObserver {
      * Creates a DirectoryObserver and registers the given directory
      */
     DirectoryObserver(Path dir) throws IOException {
-        System.out.println(new File("").getAbsolutePath());
         this.watcher = FileSystems.getDefault().newWatchService();
         this.keys = new HashMap<WatchKey,Path>();
         recursive = true;

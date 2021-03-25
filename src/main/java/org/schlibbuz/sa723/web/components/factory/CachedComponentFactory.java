@@ -55,7 +55,6 @@ public final class CachedComponentFactory extends AComponentFactory {
     private CachedComponentFactory() {
         super();
         directoryObserver = initCompFax(templatesFolder);
-        System.out.println("############### -> " + directoryObserver);
         directoryObserver.processEvents();
         templateCache = new HashMap<>();
         initTemplateCache();
@@ -65,12 +64,10 @@ public final class CachedComponentFactory extends AComponentFactory {
     // used in constructor to support final var
     private static DirectoryObserver initCompFax(final String templatesFolder) {
         try {
-            System.out.println("############### -> " + templatesFolder);
             return new DirectoryObserver(
                 Paths.get(templatesFolder)
             );
         } catch(IOException e) {
-            System.out.println(e.getMessage());
             return null;
         }
     }

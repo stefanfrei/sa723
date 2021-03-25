@@ -31,7 +31,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.schlibbuz.sa723.tools.PropsLoader;
-import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
+import org.schlibbuz.sa723.web.components.factory.CachedComponentFactory;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
 
@@ -54,7 +54,7 @@ public class AppInitListener implements ServletContextListener {
         Properties props = PropsLoader.loadProps();
         ctx.setAttribute("app.props", props);
 
-        fax = SimpleComponentFactory.getInstance();
+        fax = CachedComponentFactory.getInstance();
         ctx.setAttribute("template.factory", fax);
 
     }
