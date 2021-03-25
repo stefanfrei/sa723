@@ -34,3 +34,7 @@ bin/
 .vscode/
 test/resources/projects/**/.vscode
 test/resources/projects/maven/salut/testGradle
+
+
+# project specific
+src/main/resources/app.props

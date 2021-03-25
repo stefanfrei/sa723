@@ -21,51 +21,56 @@
  * THE SOFTWARE.
  */
 
-package org.schlibbuz.sa723.web.listeners;
+package org.schlibbuz.sa723.web.components.factory;
 
-
+import java.nio.charset.Charset;
+import java.util.List;
 import java.util.Properties;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
 import org.schlibbuz.sa723.tools.PropsLoader;
-import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
-import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
+import org.schlibbuz.sa723.web.components.Component;
+import org.schlibbuz.sa723.web.components.ComponentType;
 
 
 
-public class AppInitListener implements ServletContextListener {
+abstract class AComponentFactory implements ComponentFactory {
 
 
-    private ComponentFactory fax;
+    final Properties props;
+    final Charset encoding;
+    final String templatesFolder;
+    final String templatesSuffix;
 
 
-
-    // Webapp startup-hook
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-
-        ServletContext ctx = event.getServletContext();
-
-        // String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
-
-        Properties props = PropsLoader.loadProps();
-        ctx.setAttribute("app.props", props);
-
-        fax = SimpleComponentFactory.getInstance();
-        ctx.setAttribute("template.factory", fax);
-
+    protected AComponentFactory() {
+        props = PropsLoader.loadProps();
+        encoding = Charset.forName(props.getProperty("app.encoding"));
+        templatesFolder = props.getProperty("app.templates.folder");
+        templatesSuffix = props.getProperty("app.templates.suffix");
     }
 
 
-    // Webapp shutdown-hook
-    @Override
-    public void contextDestroyed(ServletContextEvent event) {
+    public Component createComponent(final ComponentType componentType) {
+        return null;
+    }
 
-        System.out.println("ServletContextListener destroyed");
-        fax.cleanup();
+
+    public Component createComponent(final ComponentType componentType, List<String> params) {
+        return null;
+    }
+
+
+    public void cleanup() {
+        this.cleanup(
+            Long.valueOf(
+                props.getProperty("app.cleanup.maxwait"),
+                10 //radix
+            )
+        );
+    }
+
+
+    public void cleanup(long maxWait) {
 
     }
 

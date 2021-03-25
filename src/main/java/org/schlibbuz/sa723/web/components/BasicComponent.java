@@ -21,52 +21,43 @@
  * THE SOFTWARE.
  */
 
-package org.schlibbuz.sa723.web.listeners;
+package org.schlibbuz.sa723.web.components;
 
 
-import java.util.Properties;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
-import org.schlibbuz.sa723.tools.PropsLoader;
-import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
-import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
+import java.nio.charset.Charset;
 
 
 
-public class AppInitListener implements ServletContextListener {
+public class BasicComponent extends AComponent {
 
 
-    private ComponentFactory fax;
+    private final ComponentType componentType;
+    private final Charset encoding;
 
+    private String data;
 
-
-    // Webapp startup-hook
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-
-        ServletContext ctx = event.getServletContext();
-
-        // String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
-
-        Properties props = PropsLoader.loadProps();
-        ctx.setAttribute("app.props", props);
-
-        fax = SimpleComponentFactory.getInstance();
-        ctx.setAttribute("template.factory", fax);
-
+    public BasicComponent(ComponentType componentType, String data, Charset encoding) {
+        this.componentType = componentType;
+        this.encoding = encoding;
+        this.data = data;
     }
 
 
-    // Webapp shutdown-hook
     @Override
-    public void contextDestroyed(ServletContextEvent event) {
+    public ComponentType getComponentType() {
+        return componentType;
+    }
 
-        System.out.println("ServletContextListener destroyed");
-        fax.cleanup();
 
+    @Override
+    public Charset getEncoding() {
+        return encoding;
+    }
+
+
+    @Override
+    public String getData() {
+        return data;
     }
 
 }

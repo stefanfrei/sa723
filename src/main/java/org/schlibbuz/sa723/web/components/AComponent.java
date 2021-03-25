@@ -21,52 +21,13 @@
  * THE SOFTWARE.
  */
 
-package org.schlibbuz.sa723.web.listeners;
+package org.schlibbuz.sa723.web.components;
+
+public abstract class AComponent implements Component {
+    
 
 
-import java.util.Properties;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
-import org.schlibbuz.sa723.tools.PropsLoader;
-import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
-import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
-
-
-
-public class AppInitListener implements ServletContextListener {
-
-
-    private ComponentFactory fax;
-
-
-
-    // Webapp startup-hook
-    @Override
-    public void contextInitialized(ServletContextEvent event) {
-
-        ServletContext ctx = event.getServletContext();
-
-        // String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
-
-        Properties props = PropsLoader.loadProps();
-        ctx.setAttribute("app.props", props);
-
-        fax = SimpleComponentFactory.getInstance();
-        ctx.setAttribute("template.factory", fax);
-
+    public Component createComponent(ComponentType componentType) {
+        return null;
     }
-
-
-    // Webapp shutdown-hook
-    @Override
-    public void contextDestroyed(ServletContextEvent event) {
-
-        System.out.println("ServletContextListener destroyed");
-        fax.cleanup();
-
-    }
-
 }
