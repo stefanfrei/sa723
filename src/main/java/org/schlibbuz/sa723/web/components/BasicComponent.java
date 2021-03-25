@@ -36,9 +36,9 @@ public class BasicComponent extends AComponent {
 
     private String data;
 
-    public BasicComponent(ComponentType componentType, String data) {
+    public BasicComponent(ComponentType componentType, String data, Charset encoding) {
         this.componentType = componentType;
-        encoding = Charset.forName(System.getProperty("sandbox.app.encoding"));
+        this.encoding = encoding;
         this.data = data;
     }
 

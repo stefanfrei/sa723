@@ -23,15 +23,15 @@
 
 package org.schlibbuz.sa723.web.listeners;
 
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-import org.schlibbuz.sa723.web.components.factory.CachedComponentFactory;
+import org.schlibbuz.sa723.tools.PropsLoader;
+import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
 
@@ -49,12 +49,12 @@ public class AppInitListener implements ServletContextListener {
 
         ServletContext ctx = event.getServletContext();
 
-        String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
+        // String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
 
-        Properties props = loadProps(appRoot, ctx);
+        Properties props = PropsLoader.loadProps();
         ctx.setAttribute("app.props", props);
 
-        fax = CachedComponentFactory.getInstance();
+        fax = SimpleComponentFactory.getInstance();
         ctx.setAttribute("template.factory", fax);
 
     }
@@ -67,27 +67,6 @@ public class AppInitListener implements ServletContextListener {
         System.out.println("ServletContextListener destroyed");
         fax.cleanup();
 
-    }
-
-
-
-    private Properties loadProps(String appRoot, ServletContext ctx) {
-
-        try(InputStream input = ctx.getClassLoader().getResourceAsStream("app.props")) {
-
-            Properties props = new Properties();
-            props.load(input);
-            props.setProperty("app.root", appRoot);
-            props.forEach((key, val) -> {
-                System.out.println(key + " -> " + val);
-            });
-            return props;
-
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return null;
     }
 
 }

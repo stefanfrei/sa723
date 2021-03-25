@@ -23,12 +23,11 @@
 
 package org.schlibbuz.sa723.web.components.factory;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Properties;
 
+import org.schlibbuz.sa723.tools.PropsLoader;
 import org.schlibbuz.sa723.web.components.Component;
 import org.schlibbuz.sa723.web.components.ComponentType;
 
@@ -38,39 +37,16 @@ abstract class AComponentFactory implements ComponentFactory {
 
 
     final Properties props;
-    final Charset charset;
+    final Charset encoding;
     final String templatesFolder;
     final String templatesSuffix;
 
-    static ComponentFactory instance;
 
     protected AComponentFactory() {
-        props = this.loadProps();
-        charset = Charset.forName(props.getProperty("app.encoding"));
+        props = PropsLoader.loadProps();
+        encoding = Charset.forName(props.getProperty("app.encoding"));
         templatesFolder = props.getProperty("app.templates.folder");
         templatesSuffix = props.getProperty("app.templates.suffix");
-    }
-
-    private Properties loadProps() {
-        try (InputStream input = AComponentFactory.class.getClassLoader().getResourceAsStream("app.props")) {
-
-            Properties props = new Properties();
-
-            if (input == null) {
-                System.out.println("Sorry, unable to find app.props");
-                return null;
-            }
-
-            props.load(input);
-
-            props.forEach((key, val) -> {
-                System.out.println(key + " -> " + val);
-            });
-            return props;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return null;
     }
 
 

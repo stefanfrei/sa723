@@ -49,12 +49,13 @@ public final class CachedComponentFactory extends AComponentFactory {
     private final DirectoryObserver directoryObserver;
     private final Map<String, Component> templateCache;
 
-
+    private static CachedComponentFactory instance;
 
     // Constructor part
     private CachedComponentFactory() {
         super();
         directoryObserver = initCompFax(templatesFolder);
+        System.out.println("############### -> " + directoryObserver);
         directoryObserver.processEvents();
         templateCache = new HashMap<>();
         initTemplateCache();
@@ -64,6 +65,7 @@ public final class CachedComponentFactory extends AComponentFactory {
     // used in constructor to support final var
     private static DirectoryObserver initCompFax(final String templatesFolder) {
         try {
+            System.out.println("############### -> " + templatesFolder);
             return new DirectoryObserver(
                 Paths.get(templatesFolder)
             );
@@ -102,13 +104,14 @@ public final class CachedComponentFactory extends AComponentFactory {
                 try {
                     String fileContent = FileUtils.readFileToString(
                         new File(filename),
-                        charset
+                        encoding
                     );
                     templateCache.put(
                         hashKey,
                         new BasicComponent(
                             ComponentType.fromName(hashKey),
-                            fileContent
+                            fileContent,
+                            encoding
                         )
                     );
                 } catch(IOException e) {

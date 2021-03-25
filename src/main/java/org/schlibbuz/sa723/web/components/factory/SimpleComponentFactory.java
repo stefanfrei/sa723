@@ -36,6 +36,7 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 public final class SimpleComponentFactory extends AComponentFactory {
 
 
+    private static SimpleComponentFactory instance;
     // Constructor part
     private SimpleComponentFactory() {
         super();
@@ -63,7 +64,8 @@ public final class SimpleComponentFactory extends AComponentFactory {
         try {
             return new BasicComponent(
                 componentType,
-                FileUtils.readFileToString(file, charset)
+                FileUtils.readFileToString(file, encoding),
+                encoding
             );
         } catch(IOException e) {
             System.out.println(e.getMessage());
