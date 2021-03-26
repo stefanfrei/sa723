@@ -38,3 +38,4 @@ test/resources/projects/maven/salut/testGradle
 
 # project specific
 src/main/resources/app.props
+logs/
