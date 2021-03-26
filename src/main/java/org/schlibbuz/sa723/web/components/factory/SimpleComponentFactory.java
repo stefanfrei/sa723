@@ -28,6 +28,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import org.schlibbuz.sa723.web.components.BasicComponent;
 import org.schlibbuz.sa723.web.components.Component;
@@ -36,10 +38,14 @@ import org.schlibbuz.sa723.web.components.ComponentType;
 public final class SimpleComponentFactory extends AComponentFactory {
 
 
+    private static final Logger w = LogManager.getLogger(SimpleComponentFactory.class);
+
+
     private static SimpleComponentFactory instance;
     // Constructor part
     private SimpleComponentFactory() {
         super();
+        w.trace("SimpleComponentFactory initialized");
     }
 
 

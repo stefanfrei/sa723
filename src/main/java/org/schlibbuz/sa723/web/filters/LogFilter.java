@@ -35,23 +35,28 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class LogFilter implements Filter {
+
+
+	private static final Logger w = LogManager.getLogger(LogFilter.class);
 
 	public void doFilter(ServletRequest req, ServletResponse res,
 			FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest request = (HttpServletRequest) req;
-		
+
 		
 		// Log the IP address, current timestamp and requested url.
-		System.out.println(
+		w.info(
             "IP "+ request.getRemoteAddr() + ", Time " 
 			+ new Date().toString()
             + " requested URL -> "
             + request.getRequestURL()
         );
-		
+
         chain.doFilter(req, res);
 
 	}
@@ -63,4 +68,5 @@ public class LogFilter implements Filter {
 	public void destroy() {
 
 	}
+
 }
