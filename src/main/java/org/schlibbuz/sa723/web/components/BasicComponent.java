@@ -26,10 +26,15 @@ package org.schlibbuz.sa723.web.components;
 
 import java.nio.charset.Charset;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 
 
 public class BasicComponent extends AComponent {
 
+
+    private static final Logger w = LogManager.getLogger(BasicComponent.class);
 
     private final ComponentType componentType;
     private final Charset encoding;
@@ -57,6 +62,7 @@ public class BasicComponent extends AComponent {
 
     @Override
     public String getData() {
+        w.trace("Component created");
         return data;
     }
 

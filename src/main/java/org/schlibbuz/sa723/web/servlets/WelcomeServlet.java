@@ -39,6 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import org.schlibbuz.sa723.web.components.ComponentType;
 import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
 
@@ -53,6 +56,8 @@ public class WelcomeServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
+    private static final Logger w = LogManager.getLogger(WelcomeServlet.class);
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -65,6 +70,7 @@ public class WelcomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        w.trace("entering Welcome-Servlet with method -> " + request.getMethod());
         response.setContentType("text/html;charset=UTF-8");
 
         try(PrintWriter out = response.getWriter()) {
@@ -96,6 +102,8 @@ public class WelcomeServlet extends HttpServlet {
 
             out.println(fax.createComponent(ComponentType.FOOTER).getData());
         }
+
+        w.trace("Exiting WelcomeServlet");
 
     }
 
