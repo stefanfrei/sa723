@@ -12,7 +12,7 @@ and open the template in the editor.
 :root {
     --body-background: #2B292E;
     --body-color: #C0C0C0;
-    --nav-background: rgba(0, 214, 170, .85);
+    --nav-background: rgba(1, 103, 161, 0.925);
 }
 
 *, *::before, *::after {
