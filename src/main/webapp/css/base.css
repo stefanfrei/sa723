@@ -8,13 +8,23 @@ and open the template in the editor.
     Author     : Stefan
 */
 
+
+:root {
+    --body-background: #2B292E;
+    --body-color: #C0C0C0;
+    --nav-background: rgba(0, 214, 170, .85);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
 body {
-    background-color: #2B292E;
-    color: #C0C0C0;
+    background: var(--body-background);
+    color: var(--body-color);
     font-family : corbel, verdana, arial, helvetica, sans-serif;
-    font-size: 16px;
+    font-weight: 400;
     margin: 0;
-    padding: 0;
 }
 
 .cfx::after {
@@ -22,6 +32,180 @@ body {
     clear: both;
     display: table;
 }
+
+.content {
+    height: 200vh;
+    background-image: url(//unsplash.it/1000/1000);
+    background-color: #333;
+    background-blend-mode: multiply;
+    background-size: cover;
+    display: grid;
+    place-items: center;
+}
+
+/* nav styles start */
+
+header {
+    background: var(--nav-background);
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 999;
+}
+
+.nav-toggle {
+    position: absolute !important;
+    top: -9999px !important;
+    left: -9999px !important;
+}
+
+.nav-toggle:focus ~ .nav-toggle-label {
+    outline: 3px solid rgba(lightblue, .75);
+}
+
+.nav-toggle-label {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    left: 0;
+    margin-left: 1em;
+    position: absolute;
+    top: 0;
+}
+
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    background: white;
+    border-radius: 2px;
+    display: block;
+    height: 2px;
+    position: relative;
+    width: 2em;
+}
+
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+    content: '';
+    position: absolute;
+}
+
+.nav-toggle-label span::before {
+    bottom: 7px;
+}
+
+.nav-toggle-label span::after {
+    top: 7px;
+}
+
+nav {
+    background: var(--nav-background);
+    left: 0;
+    position: absolute;
+    text-align: left;
+    top: 100%;
+    transform: scale(1, 0);
+    transform-origin: top;
+    transition: transform 400ms ease-in-out;
+    width: 100%;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-bottom: 1em;
+    margin-left: 1em;
+}
+
+nav a {
+    color: #fff;
+    font-size: 1.2rem;
+    opacity: 0;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: opacity 150ms ease-in-out;
+}
+
+nav a:hover {
+    color: #000;
+}
+
+.nav-toggle:checked ~ nav {
+    transform: scale(1,1);
+}
+
+.nav-toggle:checked ~ nav a {
+    opacity: 1;
+    transition: opacity 250ms ease-in-out 250ms;
+}
+
+@media screen and (min-width: 800px) {
+    .nav-toggle-label {
+        display: none;
+    }
+
+    header {
+        display: grid;
+        grid-template-columns: 1fr auto minmax(600px, 3fr) 1fr;
+    }
+
+    .logo {
+        grid-column: 2 / 3;
+    }
+
+    nav {
+        position: relative;
+        text-align: left;
+        transition: none;
+        transform: scale(1,1);
+        background: none;
+        top: initial;
+        left: initial;
+        /* end Edge support stuff */
+        
+        grid-column: 3 / 4;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    nav ul {
+        display: flex;
+    }
+
+    nav li {
+        margin-left: 3em;
+        margin-bottom: 0;
+    }
+
+    nav a {
+        opacity: 1;
+        position: relative;
+    }
+
+    nav a::before {
+        content: '';
+        display: block;
+        height: 5px;
+        background: black;
+        position: absolute;
+        top: -.75em;
+        left: 0;
+        right: 0;
+        transform: scale(0, 1);
+        transition: transform ease-in-out 250ms;
+    }
+
+    nav a:hover::before {
+        transform: scale(1,1);
+    }
+}
+
+/* nav styles end */
 
 .container {
     padding: 12px;
