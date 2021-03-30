@@ -84,7 +84,6 @@
     <!-- Resource provided when accesing base-uri, first available resource is served -->
     <welcome-file-list>
         <welcome-file>welcome.do</welcome-file>
-        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     <!-- End -->
 
