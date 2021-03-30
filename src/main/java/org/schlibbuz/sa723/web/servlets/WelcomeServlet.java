@@ -27,6 +27,8 @@ package org.schlibbuz.sa723.web.servlets;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.naming.Context;
@@ -89,9 +91,14 @@ public class WelcomeServlet extends HttpServlet {
                 DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
 
                 // Allocate and use a connection from the pool
-                try (Connection conn = ds.getConnection()) {
-                    out.println(conn.getSchema());
-                    out.println(conn.isClosed());
+                try (
+                    Connection conn = ds.getConnection();
+                    PreparedStatement ps = conn.prepareStatement("select * from article");
+                    ResultSet rs = ps.executeQuery()
+                ) {
+                    while(rs.next()) {
+                        out.println(rs.getString("title"));
+                    }
                 } catch (SQLException e) {
                     out.println(e.getMessage());
                 }
