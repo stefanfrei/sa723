@@ -30,6 +30,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -88,11 +91,31 @@ public class BioServlet extends HttpServlet {
                 );
                 ResultSet rs = ps.executeQuery()
             ) {
+                SimpleDateFormat sqlDateFormat = new SimpleDateFormat(
+                    (String)ctx.getAttribute("app.sql.dateformat")
+                );
+                DateFormat df = DateFormat.getDateInstance(
+                    DateFormat.LONG,
+                    request.getLocale()
+                );
+                out.println(request.getLocale());
                 while(rs.next()) {
                     out.println(rs.getString("id"));
                     out.println(rs.getString("fname"));
                     out.println(rs.getString("lname"));
-                    out.println(rs.getDate("birth"));
+
+                    String sqlDate = rs.getString("birth");
+                    try {
+                        out.println(
+                            df.format(
+                                sqlDateFormat.parse(sqlDate)
+                            )
+                        );
+                    } catch(ParseException e) {
+                        w.error(e.getMessage());
+                        out.println(rs.getString("birth"));
+                    }
+
                 }
             } catch (SQLException e) {
                 out.println(e.getMessage());

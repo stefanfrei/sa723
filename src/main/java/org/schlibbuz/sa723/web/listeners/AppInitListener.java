@@ -80,6 +80,8 @@ public class AppInitListener implements ServletContextListener {
         fax = SimpleComponentFactory.getInstance();
         ctx.setAttribute("app.template.factory", fax);
 
+        ctx.setAttribute("app.sql.dateformat", "yyyy-MM-dd");
+
         w.trace("initialized!");
 
     }
