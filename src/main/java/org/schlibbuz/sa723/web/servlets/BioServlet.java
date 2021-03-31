@@ -30,10 +30,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -54,11 +54,11 @@ import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
  *
  * @author Stefan
  */
-public class WelcomeServlet extends HttpServlet {
+public class BioServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
-    private static final Logger w = LogManager.getLogger(WelcomeServlet.class);
+    private static final Logger w = LogManager.getLogger(NewsServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,46 +72,59 @@ public class WelcomeServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        w.trace("entering Welcome-Servlet with method -> " + request.getMethod());
+        w.trace("received request with method -> " + request.getMethod());
         response.setContentType("text/html;charset=UTF-8");
 
         try(PrintWriter out = response.getWriter()) {
             ServletContext ctx = getServletContext();
-            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("template.factory");
+            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("app.template.factory");
 
             out.println(fax.createComponent(ComponentType.HEADER).getData());
             out.println(fax.createComponent(ComponentType.SANDBOX).getData());
-            
-            try {
-                // get jndi-context
-                Context initCtx = new InitialContext();
-                Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-                // Look up our data source
-                DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
+            DataSource ds = (DataSource) ctx.getAttribute("app.db");
 
-                // Allocate and use a connection from the pool
-                try (
-                    Connection conn = ds.getConnection();
-                    PreparedStatement ps = conn.prepareStatement("select * from article");
-                    ResultSet rs = ps.executeQuery()
-                ) {
-                    while(rs.next()) {
-                        out.println(rs.getString("title"));
+            try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(
+                    "select bio.id AS id, lname, fname, birth from bio join person on person.id=bio.id_person"
+                );
+                ResultSet rs = ps.executeQuery()
+            ) {
+                SimpleDateFormat sqlDateFormat = new SimpleDateFormat(
+                    (String)ctx.getAttribute("app.sql.dateformat")
+                );
+                DateFormat df = DateFormat.getDateInstance(
+                    DateFormat.LONG,
+                    request.getLocale()
+                );
+                out.println(request.getLocale());
+                while(rs.next()) {
+                    out.println(rs.getString("id"));
+                    out.println(rs.getString("fname"));
+                    out.println(rs.getString("lname"));
+
+                    String sqlDate = rs.getString("birth");
+                    try {
+                        out.println(
+                            df.format(
+                                sqlDateFormat.parse(sqlDate)
+                            )
+                        );
+                    } catch(ParseException e) {
+                        w.error(e.getMessage());
+                        out.println(rs.getString("birth"));
                     }
-                } catch (SQLException e) {
-                    out.println(e.getMessage());
-                }
 
-            } catch (NamingException e) {
+                }
+            } catch (SQLException e) {
                 out.println(e.getMessage());
             }
 
             out.println(fax.createComponent(ComponentType.FOOTER).getData());
         }
 
-        w.trace("Exiting WelcomeServlet");
-
+        w.trace("request served!");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the

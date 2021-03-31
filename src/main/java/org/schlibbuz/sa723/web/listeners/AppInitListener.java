@@ -24,11 +24,13 @@
 package org.schlibbuz.sa723.web.listeners;
 
 
-import java.util.Properties;
-
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.sql.DataSource;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -42,7 +44,7 @@ import org.schlibbuz.sa723.web.components.factory.SimpleComponentFactory;
 public class AppInitListener implements ServletContextListener {
 
 
-    private static final Logger logger = LogManager.getLogger(AppInitListener.class);
+    private static final Logger w = LogManager.getLogger(AppInitListener.class);
 
     private ComponentFactory fax;
 
@@ -52,19 +54,35 @@ public class AppInitListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent event) {
 
-        logger.trace("ServletContextListener creating");
+        w.trace("initializing ...");
 
         ServletContext ctx = event.getServletContext();
 
         // String appRoot = System.getProperty("catalina.base") + "/webapps/ROOT";
 
-        Properties props = PropsLoader.loadProps();
-        ctx.setAttribute("app.props", props);
+        ctx.setAttribute(
+            "app.props",
+            PropsLoader.loadProps()
+        );
 
+        try {
+            ctx.setAttribute(
+                "app.db",
+                (DataSource) (
+                    (Context) new InitialContext().lookup("java:comp/env")
+                ).lookup("jdbc/Sandbox")
+            );
+        } catch(NamingException e) {
+            w.error(e.getMessage());
+        }
+
+        // need instance to manage cleanup
         fax = SimpleComponentFactory.getInstance();
-        ctx.setAttribute("template.factory", fax);
+        ctx.setAttribute("app.template.factory", fax);
 
-        logger.trace("ServletContextListener created");
+        ctx.setAttribute("app.sql.dateformat", "yyyy-MM-dd");
+
+        w.trace("initialized!");
 
     }
 
@@ -73,9 +91,9 @@ public class AppInitListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent event) {
 
-        logger.trace("ServletContextListener destroying");
+        w.trace("destroying ...");
         fax.cleanup();
-        logger.trace("ServletContextListener destroyed");
+        w.trace("destroyed!");
 
     }
 
