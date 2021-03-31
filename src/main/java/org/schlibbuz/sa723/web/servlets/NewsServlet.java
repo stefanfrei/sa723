@@ -51,11 +51,11 @@ import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
  *
  * @author Stefan
  */
-public class WelcomeServlet extends HttpServlet {
+public class NewsServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
-    private static final Logger w = LogManager.getLogger(WelcomeServlet.class);
+    private static final Logger w = LogManager.getLogger(NewsServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,11 +74,10 @@ public class WelcomeServlet extends HttpServlet {
 
         try(PrintWriter out = response.getWriter()) {
             ServletContext ctx = getServletContext();
-            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("template.factory");
+            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("app.template.factory");
 
             out.println(fax.createComponent(ComponentType.HEADER).getData());
             out.println(fax.createComponent(ComponentType.SANDBOX).getData());
-            
 
             DataSource ds = (DataSource) ctx.getAttribute("app.db");
 
@@ -94,13 +93,10 @@ public class WelcomeServlet extends HttpServlet {
                 out.println(e.getMessage());
             }
 
-
-
             out.println(fax.createComponent(ComponentType.FOOTER).getData());
         }
 
         w.trace("request served!");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the

@@ -78,7 +78,7 @@ public class AppInitListener implements ServletContextListener {
 
         // need instance to manage cleanup
         fax = SimpleComponentFactory.getInstance();
-        ctx.setAttribute("template.factory", fax);
+        ctx.setAttribute("app.template.factory", fax);
 
         w.trace("initialized!");
 

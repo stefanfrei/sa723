@@ -58,16 +58,6 @@
 
     <!-- Servlets -->
     <servlet>
-        <servlet-name>WelcomeServlet</servlet-name>
-        <servlet-class>org.schlibbuz.sa723.web.servlets.WelcomeServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>WelcomeServlet</servlet-name>
-        <url-pattern>/news</url-pattern>
-        <url-pattern>/nachrichten</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
         <servlet-name>BioServlet</servlet-name>
         <servlet-class>org.schlibbuz.sa723.web.servlets.BioServlet</servlet-class>
     </servlet>
@@ -76,6 +66,16 @@
         <url-pattern>/bio</url-pattern>
         <url-pattern>/lebenslauf</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NewsServlet</servlet-name>
+        <servlet-class>org.schlibbuz.sa723.web.servlets.NewsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>NewsServlet</servlet-name>
+        <url-pattern>/news</url-pattern>
+        <url-pattern>/nachrichten</url-pattern>
+    </servlet-mapping>    
     <!-- End -->
 
 

@@ -31,9 +31,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +55,7 @@ public class BioServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
-    private static final Logger w = LogManager.getLogger(WelcomeServlet.class);
+    private static final Logger w = LogManager.getLogger(NewsServlet.class);
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,38 +74,27 @@ public class BioServlet extends HttpServlet {
 
         try(PrintWriter out = response.getWriter()) {
             ServletContext ctx = getServletContext();
-            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("template.factory");
+            ComponentFactory fax = (ComponentFactory)ctx.getAttribute("app.template.factory");
 
             out.println(fax.createComponent(ComponentType.HEADER).getData());
             out.println(fax.createComponent(ComponentType.SANDBOX).getData());
-            
-            try {
-                // get jndi-context
-                Context initCtx = new InitialContext();
-                Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-                // Look up our data source
-                DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
+            DataSource ds = (DataSource) ctx.getAttribute("app.db");
 
-                // Allocate and use a connection from the pool
-                try (
-                    Connection conn = ds.getConnection();
-                    PreparedStatement ps = conn.prepareStatement(
-                        "select bio.id AS id, lname, fname, birth from bio join person on person.id=bio.id_person"
-                    );
-                    ResultSet rs = ps.executeQuery()
-                ) {
-                    while(rs.next()) {
-                        out.println(rs.getString("id"));
-                        out.println(rs.getString("fname"));
-                        out.println(rs.getString("lname"));
-                        out.println(rs.getDate("birth"));
-                    }
-                } catch (SQLException e) {
-                    out.println(e.getMessage());
+            try (
+                Connection conn = ds.getConnection();
+                PreparedStatement ps = conn.prepareStatement(
+                    "select bio.id AS id, lname, fname, birth from bio join person on person.id=bio.id_person"
+                );
+                ResultSet rs = ps.executeQuery()
+            ) {
+                while(rs.next()) {
+                    out.println(rs.getString("id"));
+                    out.println(rs.getString("fname"));
+                    out.println(rs.getString("lname"));
+                    out.println(rs.getDate("birth"));
                 }
-
-            } catch (NamingException e) {
+            } catch (SQLException e) {
                 out.println(e.getMessage());
             }
 
@@ -116,7 +102,6 @@ public class BioServlet extends HttpServlet {
         }
 
         w.trace("request served!");
-
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
