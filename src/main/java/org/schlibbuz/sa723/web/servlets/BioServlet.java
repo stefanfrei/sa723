@@ -98,7 +98,6 @@ public class BioServlet extends HttpServlet {
                     DateFormat.LONG,
                     request.getLocale()
                 );
-                out.println(request.getLocale());
                 while(rs.next()) {
                     out.println(rs.getString("id"));
                     out.println(rs.getString("fname"));
