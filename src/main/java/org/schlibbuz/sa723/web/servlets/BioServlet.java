@@ -31,6 +31,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +54,7 @@ import org.schlibbuz.sa723.web.components.factory.ComponentFactory;
  *
  * @author Stefan
  */
-public class WelcomeServlet extends HttpServlet {
+public class BioServlet extends HttpServlet {
 
     static final long serialVersionUID = 42L;
 
@@ -79,22 +82,35 @@ public class WelcomeServlet extends HttpServlet {
             out.println(fax.createComponent(ComponentType.HEADER).getData());
             out.println(fax.createComponent(ComponentType.SANDBOX).getData());
             
+            try {
+                // get jndi-context
+                Context initCtx = new InitialContext();
+                Context envCtx = (Context) initCtx.lookup("java:comp/env");
 
-            DataSource ds = (DataSource) ctx.getAttribute("app.db");
+                // Look up our data source
+                DataSource ds = (DataSource) envCtx.lookup("jdbc/Sandbox");
 
-            try (
-                Connection conn = ds.getConnection();
-                PreparedStatement ps = conn.prepareStatement("select * from article");
-                ResultSet rs = ps.executeQuery()
-            ) {
-                while(rs.next()) {
-                    out.println(rs.getString("title"));
+                // Allocate and use a connection from the pool
+                try (
+                    Connection conn = ds.getConnection();
+                    PreparedStatement ps = conn.prepareStatement(
+                        "select bio.id AS id, lname, fname, birth from bio join person on person.id=bio.id_person"
+                    );
+                    ResultSet rs = ps.executeQuery()
+                ) {
+                    while(rs.next()) {
+                        out.println(rs.getString("id"));
+                        out.println(rs.getString("fname"));
+                        out.println(rs.getString("lname"));
+                        out.println(rs.getDate("birth"));
+                    }
+                } catch (SQLException e) {
+                    out.println(e.getMessage());
                 }
-            } catch (SQLException e) {
+
+            } catch (NamingException e) {
                 out.println(e.getMessage());
             }
-
-
 
             out.println(fax.createComponent(ComponentType.FOOTER).getData());
         }

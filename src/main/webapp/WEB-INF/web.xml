@@ -63,7 +63,18 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>WelcomeServlet</servlet-name>
-        <url-pattern>/welcome.do</url-pattern>
+        <url-pattern>/news</url-pattern>
+        <url-pattern>/nachrichten</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>BioServlet</servlet-name>
+        <servlet-class>org.schlibbuz.sa723.web.servlets.BioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BioServlet</servlet-name>
+        <url-pattern>/bio</url-pattern>
+        <url-pattern>/lebenslauf</url-pattern>
     </servlet-mapping>
     <!-- End -->
 
@@ -83,7 +94,7 @@
 
     <!-- Resource provided when accesing base-uri, first available resource is served -->
     <welcome-file-list>
-        <welcome-file>welcome.do</welcome-file>
+        <welcome-file>news</welcome-file>
     </welcome-file-list>
     <!-- End -->
 
